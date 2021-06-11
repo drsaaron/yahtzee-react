@@ -7,8 +7,21 @@
 import React, {Component} from 'react';
 import ScoreCard from './ScoreCard';
 import DiePanel from './DiePanel';
+import store from '../store/YahtzeeStore';
+import { connect } from 'react-redux';
 
-export default class GameCard extends Component {
+const mapStateToProps = (state) => {
+    return {
+	die: state.die
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+    };
+};
+
+class GameCard extends Component {
 
     constructor(props) {
         super(props);
@@ -16,12 +29,13 @@ export default class GameCard extends Component {
 
     render() {
         return (
-            <div className='gameCard'>
+	    <div className='gameCard'>
                 Yo dude.
-		<DiePanel />
+		<DiePanel die={this.props.die} />
 		<ScoreCard />
-            </div>
+	    </div>
         );
     }
 }
 
+export default connect(mapStateToProps, mapDispatchToProps)(GameCard);
