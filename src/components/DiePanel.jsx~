@@ -1,0 +1,13 @@
+
+import React, {Component} from 'react';
+
+export default class DiePanel extends Component {
+
+    render() {
+	return (
+	    <div id="diePanel">
+		a die panel
+	    </div>
+	);
+    }
+}
