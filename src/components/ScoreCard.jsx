@@ -4,10 +4,6 @@ import ScoreCardPanel from './ScoreCardPanel';
 
 export default class ScoreCard extends Component {
 
-    constructor(props) {
-	super(props);
-    }
-
     render() {
 	return (
 	    <div className="scoreCard">

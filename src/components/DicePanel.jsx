@@ -22,7 +22,7 @@ export default class DiePanel extends Component {
 	return (
 	    <div id="diePanel">
 		<button onClick={this.handleRollDice}>Roll</button>
-		{die.map(v => <Die value={v} key={v.key} />)}
+		{die.map(v => <Die die={v} key={v.key} toggleDieKeeper={this.props.toggleDieKeeper} />)}
 	    </div>
 	);
     }

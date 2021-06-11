@@ -7,9 +7,8 @@
 import React, {Component} from 'react';
 import ScoreCard from './ScoreCard';
 import DicePanel from './DicePanel';
-import store from '../store/YahtzeeStore';
 import { connect } from 'react-redux';
-import { rollDice } from '../actions/DiceActions';
+import { rollDice, toggleDieKeeper } from '../actions/DiceActions';
 
 const mapStateToProps = (state) => {
     return {
@@ -19,21 +18,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-	rollDice: (dice) => dispatch(rollDice(dice))
+	rollDice: (dice) => dispatch(rollDice(dice)),
+	toggleDieKeeper: (die, newValue) => dispatch(toggleDieKeeper(die, newValue))
     };
 };
 
 class GameCard extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
 	    <div className='gameCard'>
                 Yo dude.
-		<DicePanel dice={this.props.dice} rollDice={this.props.rollDice} />
+		<DicePanel dice={this.props.dice} rollDice={this.props.rollDice} toggleDieKeeper={this.props.toggleDieKeeper} />
 		<ScoreCard />
 	    </div>
         );
