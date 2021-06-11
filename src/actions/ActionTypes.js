@@ -1,5 +1,5 @@
 
 export default {
 
-    DIE_ROLLED: 'DieRolled'
+    DICE_ROLLED: 'DiceRolled'
 }

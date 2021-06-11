@@ -1,7 +1,7 @@
 
 import { combineReducers } from 'redux';
-import DieReducer from './DieReducer';
+import DiceReducer from './DiceReducer';
 
 export default () => combineReducers({
-    die: DieReducer
+    dice: DiceReducer
 });

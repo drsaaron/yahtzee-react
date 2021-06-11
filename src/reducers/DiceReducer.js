@@ -1,7 +1,7 @@
 
 import ActionTypes from '../actions/ActionTypes';
 
-const dieValues = [
+const diceValues = [
 	    {
 		key: 1,
 		value: 1,
@@ -30,16 +30,16 @@ const dieValues = [
 ];
 
 const initialState = {
-    die: dieValues
+    dice: diceValues
 };
 
-export default function DieReducer(state = initialState, action) {
+export default function DiceReducer(state = initialState, action) {
 
     switch (action.type) {
-    case ActionTypes.DIE_ROLLED:
+    case ActionTypes.DICE_ROLLED:
 	return {
 	    ...state,
-	    die: action.die
+	    dice: action.dice
 	};
 
     default:

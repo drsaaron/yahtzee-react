@@ -6,15 +6,22 @@ export default class DiePanel extends Component {
 
     constructor(props) {
 	super(props);
+
+	this.handleRollDice = this.handleRollDice.bind(this);
+    }
+
+    handleRollDice(event) {
+	event.preventDefault();
+	this.props.rollDice(this.props.dice.dice);
     }
     
     render() {
 	
-	var die = this.props.die.die;
+	var die = this.props.dice.dice;
 	
 	return (
 	    <div id="diePanel">
-		a die panel
+		<button onClick={this.handleRollDice}>Roll</button>
 		{die.map(v => <Die value={v} key={v.key} />)}
 	    </div>
 	);

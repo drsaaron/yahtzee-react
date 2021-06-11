@@ -6,18 +6,20 @@
 
 import React, {Component} from 'react';
 import ScoreCard from './ScoreCard';
-import DiePanel from './DiePanel';
+import DicePanel from './DicePanel';
 import store from '../store/YahtzeeStore';
 import { connect } from 'react-redux';
+import { rollDice } from '../actions/DiceActions';
 
 const mapStateToProps = (state) => {
     return {
-	die: state.die
+	dice: state.dice
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+	rollDice: (dice) => dispatch(rollDice(dice))
     };
 };
 
@@ -31,7 +33,7 @@ class GameCard extends Component {
         return (
 	    <div className='gameCard'>
                 Yo dude.
-		<DiePanel die={this.props.die} />
+		<DicePanel dice={this.props.dice} rollDice={this.props.rollDice} />
 		<ScoreCard />
 	    </div>
         );
