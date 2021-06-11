@@ -1,4 +1,13 @@
 .dieImage {
     height: 100px;
     width: 100px;
+    display: table-row;
+}
+
+.displayVertical {
+    display: table-row
+}
+
+.die {
+    padding: 5px
 }

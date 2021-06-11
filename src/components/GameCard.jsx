@@ -10,6 +10,8 @@ import DicePanel from './DicePanel';
 import { connect } from 'react-redux';
 import { rollDice, toggleDieKeeper } from '../actions/DiceActions';
 
+import './GameCard.css';
+
 const mapStateToProps = (state) => {
     return {
 	dice: state.dice

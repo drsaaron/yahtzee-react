@@ -2,6 +2,8 @@
 import React, {Component} from 'react';
 import Die from './Die';
 
+import './DicePanel.css';
+
 export default class DiePanel extends Component {
 
     constructor(props) {
@@ -17,12 +19,12 @@ export default class DiePanel extends Component {
     
     render() {
 	
-	var die = this.props.dice.dice;
+	var dice = this.props.dice.dice;
 	
 	return (
-	    <div id="diePanel">
+	    <div className="diePanel">
 		<button onClick={this.handleRollDice}>Roll</button>
-		{die.map(v => <Die die={v} key={v.key} toggleDieKeeper={this.props.toggleDieKeeper} />)}
+		{dice.map(v => <Die className="die" die={v} key={v.key} toggleDieKeeper={this.props.toggleDieKeeper} />)}
 	    </div>
 	);
     }

@@ -1,0 +1,7 @@
+.diePanel {
+    display:table-row; 
+}
+
+.die {
+    float: left
+}

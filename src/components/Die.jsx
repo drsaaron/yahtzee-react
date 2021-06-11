@@ -25,8 +25,12 @@ export default class Die extends Component {
 	return (
 	    <div className="die">
 		<form>
-		    <img src={imageUrl} alt={die.value} className="dieImage" />
-		    <input type="checkbox" onChange={this.handleKeeperChange} />
+		    <div className="displayVertical">
+			<img src={imageUrl} alt={die.value} className="dieImage" />
+		    </div>
+		    <div className="displayVertical">
+		        <input type="checkbox" onChange={this.handleKeeperChange} />
+		    </div>
 		</form>
 	    </div>
 	);
