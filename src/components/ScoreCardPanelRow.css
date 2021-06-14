@@ -1,0 +1,14 @@
+.scoreCardPanelRow {
+    display: table-row
+}
+
+.scoreCardPanelRow button {
+    float: left;
+    width: 100px
+}
+
+.scoreScore {
+    float: left;
+    text-align: right;
+    margin: 2px
+}

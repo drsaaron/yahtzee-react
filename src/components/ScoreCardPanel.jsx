@@ -5,14 +5,19 @@
  */
 
 import React, {Component} from 'react';
+import ScoreCardPanelRow from './ScoreCardPanelRow';
+
+import './ScoreCardPanel.css';
 
 export default class ScoreCardPanel extends Component {
 
     render() {
+	var rows = this.props.scores;
+	    
         return (
 	    <div className='scoreCardPanel'>
-		a panel
+		{rows.map(s => <ScoreCardPanelRow key={s.key} label={s.label} />)}
 	    </div>
-            );
+        );
     }
 }
