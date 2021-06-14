@@ -16,7 +16,7 @@ export default class ScoreCardPanel extends Component {
 	    
         return (
 	    <div className='scoreCardPanel'>
-		{rows.map(s => <ScoreCardPanelRow key={s.key} label={s.label} />)}
+		{rows.map(s => <ScoreCardPanelRow key={s.key} label={s.label} scorer={s.scorer} dice={this.props.dice} />)}
 	    </div>
         );
     }

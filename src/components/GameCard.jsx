@@ -32,7 +32,7 @@ class GameCard extends Component {
 	    <div className='gameCard'>
                 Yo dude.
 		<DicePanel dice={this.props.dice} rollDice={this.props.rollDice} toggleDieKeeper={this.props.toggleDieKeeper} />
-		<ScoreCard />
+		<ScoreCard dice={this.props.dice.dice} />
 	    </div>
         );
     }

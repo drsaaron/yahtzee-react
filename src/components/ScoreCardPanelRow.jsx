@@ -9,20 +9,36 @@ export default class ScoreCardPanelRow extends Component {
 	super(props);
 	
 	this.state = {
-	    score: 0
+	    score: null,
+	    taken: false
 	};
 	
 	this.handleButtonClick = this.handleButtonClick.bind(this);
+	this.handleMouseOver = this.handleMouseOver.bind(this);
+	this.handleMouseExit = this.handleMouseExit.bind(this);
     }
 
     handleButtonClick(event) {
 	event.preventDefault();
+	this.setState({...this.state, taken: true });
+    }
+
+    handleMouseOver(event) {
+	if (!this.state.taken) {
+	    this.setState({...this.state, score: this.props.scorer(this.props.dice) });
+	}
+    }
+
+    handleMouseExit(event) {
+	if (!this.state.taken) {
+	    this.setState({...this.state, score: null });
+	}
     }
     
     render() {
 	return (
 	    <article className="scoreCardPanelRow">
-		<button onClick={this.handleButtonClick}>{this.props.label}</button>
+		<button onClick={this.handleButtonClick} disabled={this.state.taken} onMouseEnter={this.handleMouseOver} onMouseLeave={this.handleMouseExit}>{this.props.label}</button>
 		<div class="scoreScore">{this.state.score}</div>
 	    </article>
 	);
