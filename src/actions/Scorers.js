@@ -1,7 +1,8 @@
+import ScoreTypes from './ScoreTypes';
 
 var summer = (accumulator, die) => accumulator + die.value;
 
-export function chanceScorer(dice) {
+function chanceScorer(dice) {
     return dice.reduce(summer, 0);
 }
 
@@ -15,27 +16,27 @@ function upperCardScorer(dice, value) {
     return sum;
 }
 
-export function acesScorer(dice) {
+function acesScorer(dice) {
     return upperCardScorer(dice, 1);
 }
 
-export function twosScorer(dice) {
+function twosScorer(dice) {
     return upperCardScorer(dice, 2);
 }
 
-export function threesScorer(dice) {
+function threesScorer(dice) {
     return upperCardScorer(dice, 3);
 }
 
-export function foursScorer(dice) {
+function foursScorer(dice) {
     return upperCardScorer(dice, 4);
 }
 
-export function fivesScorer(dice) {
+function fivesScorer(dice) {
     return upperCardScorer(dice, 5);
 }
 
-export function sixesScorer(dice) {
+function sixesScorer(dice) {
     return upperCardScorer(dice, 6);
 }
 
@@ -58,15 +59,15 @@ function nOfAKindScorer(dice, count) {
     }
 }
 
-export function threeOfAKindScorer(dice) {
+function threeOfAKindScorer(dice) {
     return nOfAKindScorer(dice, 3);
 }
 
-export function fourOfAKindScorer(dice) {
+function fourOfAKindScorer(dice) {
     return nOfAKindScorer(dice, 4);
 }
 
-export function yahtzeeScorer(dice) {
+function yahtzeeScorer(dice) {
     // if this is 5 of a kind, then return 0
     if (nOfAKindScorer(dice, 5) > 0) {
 	return 50;
@@ -109,7 +110,7 @@ function straightIdentifier(dice, l) {
     }
 }
 
-export function smallStraightScorer(dice) {
+function smallStraightScorer(dice) {
     if (straightIdentifier(dice, 4)) {
 	return 30;
     } else {
@@ -117,7 +118,7 @@ export function smallStraightScorer(dice) {
     }
 }
 
-export function largeStraightScorer(dice) {
+function largeStraightScorer(dice) {
     if (straightIdentifier(dice, 5)) {
 	return 40;
     } else {
@@ -125,7 +126,7 @@ export function largeStraightScorer(dice) {
     }
 }
 
-export function fullHouseScorer(dice) {
+function fullHouseScorer(dice) {
     // get keepers, should have 5
     var keepers = getKeepers(dice);
     if (keepers.length < 5) {
@@ -155,5 +156,29 @@ export function fullHouseScorer(dice) {
     } else { // alles ist in Ordnung
         return 25;
     }
-}
+};
 
+function getScorer(type) {
+    switch (type) {
+    case ScoreTypes.ACES: return acesScorer;
+    case ScoreTypes.TWOS: return twosScorer;
+    case ScoreTypes.THREES: return threesScorer;
+    case ScoreTypes.FOURS:return  foursScorer;
+    case ScoreTypes.FIVES: return fivesScorer;
+    case ScoreTypes.SIXES: return sixesScorer;
+	
+    case ScoreTypes.THREE_OF_A_KIND: return threeOfAKindScorer;
+    case ScoreTypes.FOUR_OF_A_KIND: return fourOfAKindScorer;
+    case ScoreTypes.FULL_HOUSE: return fullHouseScorer;
+    case ScoreTypes.SMALL_STRAIGHT: return smallStraightScorer;
+    case ScoreTypes.LARGE_STRAIGHT: return largeStraightScorer;
+    case ScoreTypes.YAHTZEE: return yahtzeeScorer;
+    case ScoreTypes.CHANCE: return chanceScorer;
+    }
+}
+	
+export function calculateScore(dice, scoreType) {
+
+    var scorer = getScorer(scoreType);
+    return scorer(dice);
+}

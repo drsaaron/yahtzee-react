@@ -1,7 +1,7 @@
 
 import React, {Component} from 'react';
 import ScoreCardPanel from './ScoreCardPanel';
-import { acesScorer, twosScorer, threesScorer, foursScorer, fivesScorer, sixesScorer, chanceScorer, threeOfAKindScorer, fourOfAKindScorer, yahtzeeScorer, smallStraightScorer, largeStraightScorer, fullHouseScorer } from '../actions/Scorers';
+import ScoreTypes from '../actions/ScoreTypes';
 
 import './ScoreCard.css'
 
@@ -9,22 +9,22 @@ export default class ScoreCard extends Component {
 
     render() {
 	var upperPanelScores = [
-	    { key: 1, label: 'Aces', scorer: acesScorer },
-	    { key: 2, label: 'Twos', scorer: twosScorer },
-	    { key: 3, label: 'Threes', scorer: threesScorer },
-	    { key: 4, label: 'Fours', scorer: foursScorer },
-	    { key: 5, label: 'Fives', scorer: fivesScorer },
-	    { key: 6, label: 'Sixes', scorer: sixesScorer }
+	    { key: ScoreTypes.ACES, label: 'Aces' },
+	    { key: ScoreTypes.TWOS, label: 'Twos' },
+	    { key: ScoreTypes.THREES, label: 'Threes' },
+	    { key: ScoreTypes.FOURS, label: 'Fours' },
+	    { key: ScoreTypes.FIVES, label: 'Fives' },
+	    { key: ScoreTypes.SIXES, label: 'Sixes' }
 	];
 
 	var lowerPanelScores = [
-	    { key: 1, label: '3 of a kind', scorer: threeOfAKindScorer },
-	    { key: 2, label: '4 of a kind', scorer: fourOfAKindScorer },
-	    { key: 3, label: 'Full house', scorer: fullHouseScorer },
-	    { key: 4, label: 'Small straight', scorer: smallStraightScorer },
-	    { key: 5, label: 'Large straight', scorer: largeStraightScorer },
-	    { key: 6, label: 'Yahtzee', scorer: yahtzeeScorer },
-	    { key: 7, label: 'Chance', scorer: chanceScorer }
+	    { key: ScoreTypes.THREE_OF_A_KIND, label: '3 of a kind' },
+	    { key: ScoreTypes.FOUR_OF_A_KIND, label: '4 of a kind' },
+	    { key: ScoreTypes.FULL_HOUSE, label: 'Full house' },
+	    { key: ScoreTypes.SMALL_STRAIGHT, label: 'Small straight' },
+	    { key: ScoreTypes.LARGE_STRAIGHT, label: 'Large straight' },
+	    { key: ScoreTypes.YAHTZEE, label: 'Yahtzee' },
+	    { key: ScoreTypes.CHANCE, label: 'Chance' }
 	];
 	
 	return (

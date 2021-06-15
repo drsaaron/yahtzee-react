@@ -1,5 +1,6 @@
 
 import React, {Component} from 'react';
+import { calculateScore } from '../actions/Scorers';
 
 import './ScoreCardPanelRow.css';
 
@@ -25,7 +26,7 @@ export default class ScoreCardPanelRow extends Component {
 
     handleMouseOver(event) {
 	if (!this.state.taken) {
-	    this.setState({...this.state, score: this.props.scorer(this.props.dice) });
+	    this.setState({...this.state, score: calculateScore(this.props.dice, this.props.scoreType) });
 	}
     }
 
