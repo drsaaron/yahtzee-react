@@ -47,8 +47,8 @@ function nOfAKindScorer(dice, count) {
     if (keepers.length >= count) {
 	// all must be the same value
 	var value = keepers[0].value;
-	var noMatch = keepers.filter(d => d.value != value);
-	if (noMatch.length == 0) {
+	var noMatch = keepers.filter(d => d.value !== value);
+	if (noMatch.length === 0) {
 	    // all good, so return the sum of all which is the same as chance
 	    return chanceScorer(dice);
 	} else {
@@ -80,7 +80,7 @@ function yahtzeeScorer(dice) {
 var diceSorter = (d1, d2) => {
     if (d1.value < d2.value) {
 	return -1;
-    } else if (d1.value == d2.value) {
+    } else if (d1.value === d2.value) {
 	return 0;
     } else {
 	return 1;
@@ -98,7 +98,7 @@ function straightIdentifier(dice, l) {
 
 	// each value in teh list should be 1 greater than the previous vlaue
 	for (var i = 1; i < keepers.length; i++) {
-	    if (keepers[i].value != keepers[i-1].value + 1) {
+	    if (keepers[i].value !== keepers[i-1].value + 1) {
 		return false;
 	    }
 	}
@@ -149,9 +149,9 @@ function fullHouseScorer(dice) {
        keepers[3] == keepers[4] == high.
        We have defined low to equal keepers[0] and high to
        equal keepers[3]. */
-    if (low  != keepers[1].value ||
-        high != keepers[4].value ||
-        (mid != low && mid != high)) { // not a full house
+    if (low  !== keepers[1].value ||
+        high !== keepers[4].value ||
+        (mid !== low && mid !== high)) { // not a full house
         return 0;
     } else { // alles ist in Ordnung
         return 25;

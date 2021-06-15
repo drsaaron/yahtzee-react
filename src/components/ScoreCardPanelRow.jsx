@@ -1,17 +1,22 @@
 
 import React, {Component} from 'react';
 import { calculateScore } from '../actions/Scorers';
+import { takeScore } from '../actions/ScoreActions';
+import { connect } from 'react-redux';
 
 import './ScoreCardPanelRow.css';
 
-export default class ScoreCardPanelRow extends Component {
+class ScoreCardPanelRow extends Component {
 
     constructor(props) {
 	super(props);
-	
+
+	var scoreCard = this.props.scoreCard;
+	var index = scoreCard.scores.findIndex(s => s.type === this.props.scoreType);
+	console.log("index = " + index);
 	this.state = {
-	    score: null,
-	    taken: false
+	    initialScore: scoreCard.scores[index].score,
+	    score: scoreCard.scores[index].score,
 	};
 	
 	this.handleButtonClick = this.handleButtonClick.bind(this);
@@ -19,29 +24,51 @@ export default class ScoreCardPanelRow extends Component {
 	this.handleMouseExit = this.handleMouseExit.bind(this);
     }
 
+    getScoreState() {
+	var index = this.props.scoreCard.scores.findIndex(s => s.type === this.props.scoreType);
+	return this.props.scoreCard.scores[index];
+    }
+    
     handleButtonClick(event) {
 	event.preventDefault();
-	this.setState({...this.state, taken: true });
+	this.props.takeScore(this.props.scoreType, calculateScore(this.props.dice, this.props.scoreType));
     }
 
     handleMouseOver(event) {
-	if (!this.state.taken) {
+	var scoreState = this.getScoreState();
+	if (!scoreState.taken) {
 	    this.setState({...this.state, score: calculateScore(this.props.dice, this.props.scoreType) });
 	}
     }
 
     handleMouseExit(event) {
-	if (!this.state.taken) {
-	    this.setState({...this.state, score: null });
+	var scoreState = this.getScoreState();
+	if (!scoreState.taken) {
+	    this.setState({...this.state, score: this.state.initialScore });
 	}
     }
     
     render() {
+	var scoreState = this.getScoreState();
 	return (
 	    <article className="scoreCardPanelRow">
-		<button onClick={this.handleButtonClick} disabled={this.state.taken} onMouseEnter={this.handleMouseOver} onMouseLeave={this.handleMouseExit}>{this.props.label}</button>
-		<div class="scoreScore">{this.state.score}</div>
+		<button onClick={this.handleButtonClick} disabled={scoreState.taken} onMouseEnter={this.handleMouseOver} onMouseLeave={this.handleMouseExit}>{this.props.label}</button>
+		<div className="scoreScore">{this.state.score}</div>
 	    </article>
 	);
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+	scoreCard: state.scoreCard
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+	takeScore: (scoreType, score) => dispatch(takeScore(scoreType, score))
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScoreCardPanelRow);

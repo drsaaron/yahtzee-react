@@ -14,7 +14,8 @@ import './GameCard.css';
 
 const mapStateToProps = (state) => {
     return {
-	dice: state.dice
+	dice: state.dice,
+	scoreCard: state.scoreCard
     };
 };
 
@@ -32,7 +33,7 @@ class GameCard extends Component {
 	    <div className='gameCard'>
                 Yo dude.
 		<DicePanel dice={this.props.dice} rollDice={this.props.rollDice} toggleDieKeeper={this.props.toggleDieKeeper} />
-		<ScoreCard dice={this.props.dice.dice} />
+		<ScoreCard dice={this.props.dice.dice} scoreCard={this.props.scoreCard} />
 	    </div>
         );
     }
