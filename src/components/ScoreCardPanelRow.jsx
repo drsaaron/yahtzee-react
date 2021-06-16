@@ -26,7 +26,7 @@ class ScoreCardPanelRow extends Component {
     
     handleButtonClick(event) {
 	event.preventDefault();
-	this.props.takeScore(this.props.scoreType, calculateScore(this.props.dice, this.props.scoreType));
+	this.props.takeScore(this.props.scoreType, calculateScore(this.props.dice, this.props.scoreType), this.props.dice);
     }
 
     handleMouseOver(event) {
@@ -64,7 +64,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-	takeScore: (scoreType, score) => dispatch(takeScore(scoreType, score)),
+	takeScore: (scoreType, score, dice) => dispatch(takeScore(scoreType, score, dice)),
 	updatePossibleScore: (scoreType, score) => dispatch(updatePossibleScore(scoreType, score))
     };
 }

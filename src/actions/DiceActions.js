@@ -32,3 +32,10 @@ export function toggleDieKeeper(die, newValue) {
 	});
     }
 }
+
+export function clearKeepers(dice) {
+
+    return (dispatch) => {
+	dispatch({type: ActionTypes.CLEAR_KEEPERS, dice: dice });
+    };
+}

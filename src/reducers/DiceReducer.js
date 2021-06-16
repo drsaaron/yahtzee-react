@@ -43,6 +43,7 @@ export default function DiceReducer(state = initialState, action) {
 	};
 
     case ActionTypes.NEW_GAME:
+    case ActionTypes.CLEAR_KEEPERS:
 	var dice = state.dice;
 	for (var i = 0; i < dice.length; i++) {
 	    dice[i].keeper = false;
