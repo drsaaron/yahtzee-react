@@ -4,6 +4,12 @@ import ScoreTypes from '../actions/ScoreTypes';
 const UPPER_PANEL = [ ScoreTypes.ACES, ScoreTypes.TWOS, ScoreTypes.THREES, ScoreTypes.FOURS, ScoreTypes.FIVES, ScoreTypes.SIXES ];
 const LOWER_PANEL = [ ScoreTypes.THREE_OF_A_KIND, ScoreTypes.FOUR_OF_A_KIND, ScoreTypes.FULL_HOUSE, ScoreTypes.SMALL_STRAIGHT, ScoreTypes.LARGE_STRAIGHT, ScoreTypes.YAHTZEE, ScoreTypes.CHANCE ];
 
+/* a function to create a deep copy of an array.  this is needed for when we update the scores array in the state.
+   If we update the array directly, then the old state and new state are the same. */
+const cloneArray = (array) => {
+    return JSON.parse(JSON.stringify(array))
+}
+
 const initialState = {
     upperPanelTotal: 0,
     lowerPanelTotal: 0,
@@ -43,7 +49,7 @@ export default function ScoreCardReducer(state = initialState, action) {
 	var scoreType = action.scoreType;
 	var score = action.score;
 
-	var scores = state.scores;
+	var scores = cloneArray(state.scores);
 	var index = scores.findIndex(s => s.type === scoreType);
 	scores[index].score = score;
 	scores[index].taken = true;
@@ -60,7 +66,7 @@ export default function ScoreCardReducer(state = initialState, action) {
 	scoreType = action.scoreType;
 	score = action.score;
 
-	scores = state.scores;
+	scores = cloneArray(state.scores);
 	index = scores.findIndex(s => s.type === scoreType);
 	scores[index].possibleScore = score;
 
@@ -72,7 +78,7 @@ export default function ScoreCardReducer(state = initialState, action) {
 	lowerPanelScore = 0;
 	total = 0;
 
-	scores = state.scores;
+	scores = cloneArray(state.scores);
 	for (var i = 0; i < scores.length; i++) {
 	    scores[i].taken = false;
 	    scores[i].score = 0;
