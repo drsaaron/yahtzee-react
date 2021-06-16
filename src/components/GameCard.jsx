@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-import React, {Component} from 'react';
 import ScoreCard from './ScoreCard';
 import DicePanel from './DicePanel';
 import { connect } from 'react-redux';
@@ -28,17 +27,14 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-class GameCard extends Component {
-
-    render() {
-        return (
-	    <div className='gameCard'>
-                Yo dude.
-		<DicePanel dice={this.props.dice} rollDice={this.props.rollDice} toggleDieKeeper={this.props.toggleDieKeeper} newGame={this.props.newGame} />
-		<ScoreCard dice={this.props.dice.dice} scoreCard={this.props.scoreCard} />
-	    </div>
-        );
-    }
-}
+const GameCard = (props) => {
+    return (
+	<div className='gameCard'>
+            Yo dude.
+	    <DicePanel dice={props.dice} rollDice={props.rollDice} toggleDieKeeper={props.toggleDieKeeper} newGame={props.newGame} />
+	    <ScoreCard dice={props.dice.dice} scoreCard={props.scoreCard} />
+	</div>
+    );
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameCard);
