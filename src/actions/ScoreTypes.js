@@ -8,7 +8,7 @@ export default {
     SIXES: 'Sixes',
 
     THREE_OF_A_KIND: '3ofakind',
-    FOUR_OF_A_FIND: '4ofakind',
+    FOUR_OF_A_KIND: '4ofakind',
     FULL_HOUSE: 'FullHouse',
     SMALL_STRAIGHT: 'SmallStraight',
     LARGE_STRAIGHT: 'LargeStraight',

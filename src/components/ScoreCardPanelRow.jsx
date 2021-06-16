@@ -23,7 +23,7 @@ class ScoreCardPanelRow extends Component {
 	this.handleMouseOver = this.handleMouseOver.bind(this);
 	this.handleMouseExit = this.handleMouseExit.bind(this);
     }
-
+    
     getScoreState() {
 	var index = this.props.scoreCard.scores.findIndex(s => s.type === this.props.scoreType);
 	return this.props.scoreCard.scores[index];

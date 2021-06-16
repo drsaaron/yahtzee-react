@@ -55,6 +55,19 @@ export default function ScoreCardReducer(state = initialState, action) {
 
 	// done
 	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: total };
+
+    case ActionTypes.NEW_GAME:
+	upperPanelScore = 0;
+	lowerPanelScore = 0;
+	total = 0;
+
+	scores = state.scores;
+	for (var i = 0; i < scores.length; i++) {
+	    scores[i].taken = false;
+	    scores[i].score = 0;
+	}
+
+	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: total };
 	
     default:
 	return { ...state };

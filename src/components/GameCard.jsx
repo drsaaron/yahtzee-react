@@ -9,6 +9,7 @@ import ScoreCard from './ScoreCard';
 import DicePanel from './DicePanel';
 import { connect } from 'react-redux';
 import { rollDice, toggleDieKeeper } from '../actions/DiceActions';
+import { newGame } from '../actions/GameActions';
 
 import './GameCard.css';
 
@@ -22,7 +23,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
 	rollDice: (dice) => dispatch(rollDice(dice)),
-	toggleDieKeeper: (die, newValue) => dispatch(toggleDieKeeper(die, newValue))
+	toggleDieKeeper: (die, newValue) => dispatch(toggleDieKeeper(die, newValue)),
+	newGame: () => dispatch(newGame())
     };
 };
 
@@ -32,7 +34,7 @@ class GameCard extends Component {
         return (
 	    <div className='gameCard'>
                 Yo dude.
-		<DicePanel dice={this.props.dice} rollDice={this.props.rollDice} toggleDieKeeper={this.props.toggleDieKeeper} />
+		<DicePanel dice={this.props.dice} rollDice={this.props.rollDice} toggleDieKeeper={this.props.toggleDieKeeper} newGame={this.props.newGame} />
 		<ScoreCard dice={this.props.dice.dice} scoreCard={this.props.scoreCard} />
 	    </div>
         );
