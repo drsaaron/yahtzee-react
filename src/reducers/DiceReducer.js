@@ -31,7 +31,8 @@ const diceValues = [
 ];
 
 const initialState = {
-    dice: diceValues
+    dice: diceValues,
+    rollCount: 0
 };
 
 export default function DiceReducer(state = initialState, action) {
@@ -40,9 +41,16 @@ export default function DiceReducer(state = initialState, action) {
     case ActionTypes.DICE_ROLLED:
 	return {
 	    ...state,
-	    dice: action.dice
+	    dice: action.dice,
+	    rollCount: state.rollCount + 1
 	};
 
+    case ActionTypes.SCORE_TAKEN:
+	return {
+	    ...state,
+	    rollCount: 0
+	};
+	
     case ActionTypes.DIE_KEEPER_CHANGE:
 	var key = action.key;
 	var keeper = action.keeper;
