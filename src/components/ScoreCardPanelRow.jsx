@@ -1,7 +1,7 @@
 
 import React, {Component} from 'react';
 import { calculateScore } from '../actions/Scorers';
-import { takeScore } from '../actions/ScoreActions';
+import { takeScore, updatePossibleScore } from '../actions/ScoreActions';
 import { connect } from 'react-redux';
 
 import './ScoreCardPanelRow.css';
@@ -13,12 +13,7 @@ class ScoreCardPanelRow extends Component {
 
 	var scoreCard = this.props.scoreCard;
 	var index = scoreCard.scores.findIndex(s => s.type === this.props.scoreType);
-	console.log("index = " + index);
-	this.state = {
-	    initialScore: scoreCard.scores[index].score,
-	    score: scoreCard.scores[index].score,
-	};
-	
+
 	this.handleButtonClick = this.handleButtonClick.bind(this);
 	this.handleMouseOver = this.handleMouseOver.bind(this);
 	this.handleMouseExit = this.handleMouseExit.bind(this);
@@ -37,23 +32,25 @@ class ScoreCardPanelRow extends Component {
     handleMouseOver(event) {
 	var scoreState = this.getScoreState();
 	if (!scoreState.taken) {
-	    this.setState({...this.state, score: calculateScore(this.props.dice, this.props.scoreType) });
+	    this.props.updatePossibleScore(this.props.scoreType, calculateScore(this.props.dice, this.props.scoreType));
 	}
     }
 
     handleMouseExit(event) {
 	var scoreState = this.getScoreState();
 	if (!scoreState.taken) {
-	    this.setState({...this.state, score: this.state.initialScore });
+	    this.props.updatePossibleScore(this.props.scoreType, 0);
 	}
     }
     
     render() {
 	var scoreState = this.getScoreState();
+	var displayScore = scoreState.taken ? scoreState.score : scoreState.possibleScore;
+	
 	return (
 	    <article className="scoreCardPanelRow">
 		<button onClick={this.handleButtonClick} disabled={scoreState.taken} onMouseEnter={this.handleMouseOver} onMouseLeave={this.handleMouseExit}>{this.props.label}</button>
-		<div className="scoreScore">{this.state.score}</div>
+		<div className="scoreScore">{displayScore}</div>
 	    </article>
 	);
     }
@@ -67,7 +64,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-	takeScore: (scoreType, score) => dispatch(takeScore(scoreType, score))
+	takeScore: (scoreType, score) => dispatch(takeScore(scoreType, score)),
+	updatePossibleScore: (scoreType, score) => dispatch(updatePossibleScore(scoreType, score))
     };
 }
 

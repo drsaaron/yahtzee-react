@@ -10,20 +10,20 @@ const initialState = {
     total: 0,
 
     scores: [
-	{ type: ScoreTypes.ACES,  score: 0, taken: false },
-	{ type: ScoreTypes.TWOS, score: 0, taken: false },
-	{ type: ScoreTypes.THREES, score: 0, taken: false },
-	{ type: ScoreTypes.FOURS, score: 0, taken: false },
-	{ type: ScoreTypes.FIVES, score: 0, taken: false },
-	{ type: ScoreTypes.SIXES, score: 0, taken: false },
+	{ type: ScoreTypes.ACES, score: 0, taken: false, possibleScore: 0 },
+	{ type: ScoreTypes.TWOS, score: 0, taken: false, possibleScore: 0 },
+	{ type: ScoreTypes.THREES, score: 0, taken: false, possibleScore: 0 },
+	{ type: ScoreTypes.FOURS, score: 0, taken: false, possibleScore: 0 },
+	{ type: ScoreTypes.FIVES, score: 0, taken: false, possibleScore: 0 },
+	{ type: ScoreTypes.SIXES, score: 0, taken: false, possibleScore: 0 },
 
-	{ type: ScoreTypes.THREE_OF_A_KIND, score: 0, taken: false },
-	{ type: ScoreTypes.FOUR_OF_A_KIND, score: 0, taken: false },
-	{ type: ScoreTypes.FULL_HOUSE, score: 0, taken: false },
-	{ type: ScoreTypes.SMALL_STRAIGHT, score: 0, taken: false },
-	{ type: ScoreTypes.LARGE_STRAIGHT, score: 0, taken: false },
-	{ type: ScoreTypes.YAHTZEE, score: 0, taken: false },
-	{ type: ScoreTypes.CHANCE, score: 0, taken: false }
+	{ type: ScoreTypes.THREE_OF_A_KIND, score: 0, taken: false, possibleScore: 0 },
+	{ type: ScoreTypes.FOUR_OF_A_KIND, score: 0, taken: false, possibleScore: 0 },
+	{ type: ScoreTypes.FULL_HOUSE, score: 0, taken: false, possibleScore: 0 },
+	{ type: ScoreTypes.SMALL_STRAIGHT, score: 0, taken: false, possibleScore: 0 },
+	{ type: ScoreTypes.LARGE_STRAIGHT, score: 0, taken: false, possibleScore: 0 },
+	{ type: ScoreTypes.YAHTZEE, score: 0, taken: false, possibleScore: 0 },
+	{ type: ScoreTypes.CHANCE, score: 0, taken: false, possibleScore: 0 }
     ]
 };
 
@@ -56,6 +56,17 @@ export default function ScoreCardReducer(state = initialState, action) {
 	// done
 	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: total };
 
+    case ActionTypes.UPDATE_POSSIBLE_SCORE:
+	scoreType = action.scoreType;
+	score = action.score;
+
+	scores = state.scores;
+	index = scores.findIndex(s => s.type === scoreType);
+	scores[index].possibleScore = score;
+
+	// done
+	return { ...state, scores: scores };	
+	
     case ActionTypes.NEW_GAME:
 	upperPanelScore = 0;
 	lowerPanelScore = 0;
@@ -65,6 +76,7 @@ export default function ScoreCardReducer(state = initialState, action) {
 	for (var i = 0; i < scores.length; i++) {
 	    scores[i].taken = false;
 	    scores[i].score = 0;
+	    scores[i].possibleScore = 0;
 	}
 
 	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: total };
