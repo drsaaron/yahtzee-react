@@ -39,3 +39,10 @@ export function clearKeepers(dice) {
 	dispatch({type: ActionTypes.CLEAR_KEEPERS, dice: dice });
     };
 }
+
+export function keepAll(dice) {
+
+    return (dispatch) => {
+	dispatch({type: ActionTypes.KEEP_ALL, dice: dice });
+    };
+}

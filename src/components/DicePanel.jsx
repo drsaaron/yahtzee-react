@@ -14,7 +14,17 @@ function handleNewGame(event, props) {
     props.newGame();
 }
 
-const DiePanel = (props) => {
+function clearKeepers(event, props) {
+    event.preventDefault();
+    props.clearKeepers(props.dice.dice);
+}
+
+function keepAll(event, props) {
+    event.preventDefault();
+    props.keepAll(props.dice.dice);
+}
+
+const DicePanel = (props) => {
 
     // on mount, roll the dice.
     React.useEffect(() => {
@@ -29,11 +39,17 @@ const DiePanel = (props) => {
     
     return (
 	<div className="diePanel">
-	    <button onClick={(event) => handleRollDice(event, props)} disabled={!anotherRollAllowed}>{label}</button>
-	    <button onClick={(event) => handleNewGame(event, props)}>New game</button>
-	    {dice.map(v => <Die className="die" die={v} key={v.key} toggleDieKeeper={props.toggleDieKeeper} />)}
+	    <div id="diceControlButtons">
+		<button onClick={(event) => handleRollDice(event, props)} disabled={!anotherRollAllowed}>{label}</button>
+		<button onClick={(event) => clearKeepers(event, props)}>Clear keepers</button>
+		<button onClick={(event) => keepAll(event, props)}>Keep all</button>
+		<button onClick={(event) => handleNewGame(event, props)}>New game</button>
+	    </div>
+	    <div id="dice">
+		{dice.map(v => <Die className="die" die={v} key={v.key} toggleDieKeeper={props.toggleDieKeeper} />)}
+	    </div>
 	</div>
     );
 }
 
-export default DiePanel;
+export default DicePanel;

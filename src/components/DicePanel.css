@@ -5,3 +5,15 @@
 .die {
     float: left
 }
+
+#dice {
+    float: left
+}
+
+#diceControlButtons {
+    float: right;
+}
+
+#diceControlButtons button {
+    float: left;
+}

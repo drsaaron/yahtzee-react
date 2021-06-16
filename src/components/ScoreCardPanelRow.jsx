@@ -12,7 +12,6 @@ class ScoreCardPanelRow extends Component {
 	super(props);
 
 	var scoreCard = this.props.scoreCard;
-	var index = scoreCard.scores.findIndex(s => s.type === this.props.scoreType);
 
 	this.handleButtonClick = this.handleButtonClick.bind(this);
 	this.handleMouseOver = this.handleMouseOver.bind(this);

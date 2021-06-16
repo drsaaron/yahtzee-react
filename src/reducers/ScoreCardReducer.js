@@ -31,8 +31,8 @@ const initialState = {
 function accumulateScore(scores, panel) {
     var panelScore = 0;
     for (var i = 0; i < panel.length; i++) {
-	var type = panel[i];
-	panelScore += scores.find(s => s.type === type).score;
+	var scoreType = panel[i];
+	panelScore += scores.find(s => s.type === scoreType).score;
     }
     return panelScore;
 }

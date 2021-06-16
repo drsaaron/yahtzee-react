@@ -62,13 +62,21 @@ export default function DiceReducer(state = initialState, action) {
 	
     case ActionTypes.NEW_GAME:
     case ActionTypes.CLEAR_KEEPERS:
-	var dice = cloneArray(state.dice);
+	dice = cloneArray(state.dice);
 	for (var i = 0; i < dice.length; i++) {
 	    dice[i].keeper = false;
 	}
 
 	return {...state, dice: dice };
 
+    case ActionTypes.KEEP_ALL:
+	dice = cloneArray(state.dice);
+	for (i = 0; i < dice.length; i++) {
+	    dice[i].keeper = true;
+	}
+
+	return {...state, dice: dice }
+	
     default:
 	return {
 	    ...state
