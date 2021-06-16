@@ -29,6 +29,7 @@ const ScoreCard = (props) => {
 	<div className="scoreCard">
 	    <ScoreCardPanel id='upperScoreCard' scores={upperPanelScores} dice={props.dice} scoreCard={props.scoreCard} total={props.scoreCard.upperPanelTotal} />
 	    <ScoreCardPanel id='lowerScoreCard' scores={lowerPanelScores} dice={props.dice} scoreCard={props.scoreCard} total={props.scoreCard.lowerPanelTotal} />
+	    <div id="totalScore">{props.scoreCard.total}</div>
 	</div>
     );
 }

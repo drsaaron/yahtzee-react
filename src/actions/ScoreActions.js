@@ -3,10 +3,10 @@ import ActionTypes from './ActionTypes';
 import { rollDice, clearKeepers } from './DiceActions';
 
 export function takeScore(scoreType, score, dice) {
-    return (dispatch) => {
+    return (dispatch, getState) => {
 	dispatch({type: ActionTypes.SCORE_TAKEN, scoreType: scoreType, score: score});
-	dispatch(clearKeepers(dice));
-	dispatch(rollDice(dice));
+	dispatch(clearKeepers(getState().dice.dice));
+	dispatch(rollDice(getState().dice.dice));
     }
 }
 
