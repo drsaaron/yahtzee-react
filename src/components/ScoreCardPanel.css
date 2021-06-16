@@ -3,3 +3,11 @@
     float: left;
     margin: 5px;
 }
+
+.bonusEarned {
+    color: green
+}
+
+.bonusNotEarned {
+    color: red
+}

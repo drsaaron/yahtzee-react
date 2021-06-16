@@ -27,8 +27,8 @@ const lowerPanelScores = [
 const ScoreCard = (props) => {
     return (
 	<div className="scoreCard">
-	    <ScoreCardPanel id='upperScoreCard' scores={upperPanelScores} dice={props.dice} scoreCard={props.scoreCard} total={props.scoreCard.upperPanelTotal} />
-	    <ScoreCardPanel id='lowerScoreCard' scores={lowerPanelScores} dice={props.dice} scoreCard={props.scoreCard} total={props.scoreCard.lowerPanelTotal} />
+	    <ScoreCardPanel id='upperScoreCard' scores={upperPanelScores} dice={props.dice} scoreCard={props.scoreCard} total={props.scoreCard.upperPanelTotal} includeBonus={true} />
+	    <ScoreCardPanel id='lowerScoreCard' scores={lowerPanelScores} dice={props.dice} scoreCard={props.scoreCard} total={props.scoreCard.lowerPanelTotal} includeBonus={false} />
 	    <div id="totalScore">{props.scoreCard.total}</div>
 	</div>
     );
