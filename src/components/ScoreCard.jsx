@@ -29,8 +29,8 @@ export default class ScoreCard extends Component {
 	
 	return (
 	    <div className="scoreCard">
-		<ScoreCardPanel id='upperScoreCard' scores={upperPanelScores} dice={this.props.dice} scoreCard={this.props.scoreCard} />
-		<ScoreCardPanel id='lowerScoreCard' scores={lowerPanelScores} dice={this.props.dice} scoreCard={this.props.scoreCard} />
+		<ScoreCardPanel id='upperScoreCard' scores={upperPanelScores} dice={this.props.dice} scoreCard={this.props.scoreCard} total={this.props.scoreCard.upperPanelTotal} />
+		<ScoreCardPanel id='lowerScoreCard' scores={lowerPanelScores} dice={this.props.dice} scoreCard={this.props.scoreCard} total={this.props.scoreCard.lowerPanelTotal} />
 	    </div>
 	);
     }

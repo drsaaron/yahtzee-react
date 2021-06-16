@@ -1,6 +1,9 @@
 import ActionTypes from '../actions/ActionTypes';
 import ScoreTypes from '../actions/ScoreTypes';
 
+const UPPER_PANEL = [ ScoreTypes.ACES, ScoreTypes.TWOS, ScoreTypes.THREES, ScoreTypes.FOURS, ScoreTypes.FIVES, ScoreTypes.SIXES ];
+const LOWER_PANEL = [ ScoreTypes.THREE_OF_A_KIND, ScoreTypes.FOUR_OF_A_KIND, ScoreTypes.FULL_HOUSE, ScoreTypes.SMALL_STRAIGHT, ScoreTypes.LARGE_STRAIGHT, ScoreTypes.YAHTZEE, ScoreTypes.CHANCE ];
+
 const initialState = {
     upperPanelTotal: 0,
     lowerPanelTotal: 0,
@@ -24,6 +27,15 @@ const initialState = {
     ]
 };
 
+function accumulateScore(scores, panel) {
+    var panelScore = 0;
+    for (var i = 0; i < panel.length; i++) {
+	var type = panel[i];
+	panelScore += scores.find(s => s.type === type).score;
+    }
+    return panelScore;
+}
+
 export default function ScoreCardReducer(state = initialState, action) {
     switch(action.type) {
 
@@ -36,7 +48,13 @@ export default function ScoreCardReducer(state = initialState, action) {
 	scores[index].score = score;
 	scores[index].taken = true;
 
-	return { ...state, scores: scores };
+	// update scores.
+	var upperPanelScore = accumulateScore(scores, UPPER_PANEL);
+	var lowerPanelScore = accumulateScore(scores, LOWER_PANEL);
+	var total = upperPanelScore + lowerPanelScore;
+
+	// done
+	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: total };
 	
     default:
 	return { ...state };
