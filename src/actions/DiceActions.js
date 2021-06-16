@@ -25,10 +25,10 @@ export function rollDice(dice) {
 export function toggleDieKeeper(die, newValue) {
 
     return (dispatch) => {
-	die.keeper = newValue;
 	dispatch({
 	    type: ActionTypes.DIE_KEEPER_CHANGE,
-	    die
+	    key: die.key,
+	    keeper: newValue
 	});
     }
 }

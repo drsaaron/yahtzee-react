@@ -1,14 +1,9 @@
 import ActionTypes from '../actions/ActionTypes';
 import ScoreTypes from '../actions/ScoreTypes';
+import { cloneArray } from './utilityFunctions';
 
 const UPPER_PANEL = [ ScoreTypes.ACES, ScoreTypes.TWOS, ScoreTypes.THREES, ScoreTypes.FOURS, ScoreTypes.FIVES, ScoreTypes.SIXES ];
 const LOWER_PANEL = [ ScoreTypes.THREE_OF_A_KIND, ScoreTypes.FOUR_OF_A_KIND, ScoreTypes.FULL_HOUSE, ScoreTypes.SMALL_STRAIGHT, ScoreTypes.LARGE_STRAIGHT, ScoreTypes.YAHTZEE, ScoreTypes.CHANCE ];
-
-/* a function to create a deep copy of an array.  this is needed for when we update the scores array in the state.
-   If we update the array directly, then the old state and new state are the same. */
-const cloneArray = (array) => {
-    return JSON.parse(JSON.stringify(array))
-}
 
 const initialState = {
     upperPanelTotal: 0,

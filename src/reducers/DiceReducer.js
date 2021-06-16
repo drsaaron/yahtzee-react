@@ -1,5 +1,6 @@
 
 import ActionTypes from '../actions/ActionTypes';
+import { cloneArray } from './utilityFunctions';
 
 const diceValues = [
 	    {
@@ -42,9 +43,18 @@ export default function DiceReducer(state = initialState, action) {
 	    dice: action.dice
 	};
 
+    case ActionTypes.DIE_KEEPER_CHANGE:
+	var key = action.key;
+	var keeper = action.keeper;
+
+	var dice = cloneArray(state.dice);
+	dice.find(d => d.key === key).keeper = keeper;
+
+	return {...state, dice: dice };
+	
     case ActionTypes.NEW_GAME:
     case ActionTypes.CLEAR_KEEPERS:
-	var dice = state.dice;
+	var dice = cloneArray(state.dice);
 	for (var i = 0; i < dice.length; i++) {
 	    dice[i].keeper = false;
 	}
