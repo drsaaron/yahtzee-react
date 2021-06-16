@@ -9,6 +9,7 @@ const initialState = {
     upperPanelTotal: 0,
     lowerPanelTotal: 0,
     total: 0,
+    bonusEarned: false,
 
     scores: [
 	{ type: ScoreTypes.ACES, score: 0, taken: false, possibleScore: 0 },
@@ -48,14 +49,23 @@ export default function ScoreCardReducer(state = initialState, action) {
 	var index = scores.findIndex(s => s.type === scoreType);
 	scores[index].score = score;
 	scores[index].taken = true;
+	var bonusEarned = false;
 
 	// update scores.
 	var upperPanelScore = accumulateScore(scores, UPPER_PANEL);
 	var lowerPanelScore = accumulateScore(scores, LOWER_PANEL);
+
+	// check for bonus
+	if (upperPanelScore >= 63) {
+	    upperPanelScore += 35;
+	    bonusEarned = true;
+	}
+	
+	// calc the total
 	var total = upperPanelScore + lowerPanelScore;
 
 	// done
-	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: total };
+	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: total, bonusEarned: bonusEarned };
 
     case ActionTypes.UPDATE_POSSIBLE_SCORE:
 	scoreType = action.scoreType;
@@ -80,7 +90,7 @@ export default function ScoreCardReducer(state = initialState, action) {
 	    scores[i].possibleScore = 0;
 	}
 
-	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: total };
+	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: total, bonusEarned: false };
 	
     default:
 	return { ...state };
