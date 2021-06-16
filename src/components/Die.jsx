@@ -7,20 +7,16 @@ export default class Die extends Component {
     constructor(props) {
 	super(props);
 
-	this.state = { keeper: this.props.die.keeper };
-
 	this.handleKeeperChange = this.handleKeeperChange.bind(this);
 	this.handleImageClick = this.handleImageClick.bind(this);
     }
 
     handleKeeperChange(event) {
-	this.setState({...this.state, keeper: event.target.checked });
 	this.props.toggleDieKeeper(this.props.die, event.target.checked);
     }
 
     handleImageClick(event) {
-	var checked = !this.state.keeper;
-	this.setState({...this.state, keeper: checked });
+	var checked = !this.props.die.keeper;
 	this.props.toggleDieKeeper(this.props.die, checked);
     }
     
