@@ -1,6 +1,6 @@
 {
   "name": "yahtzee-react",
-  "version": "1.0.0-RELEASE",
+  "version": "1.0.1-RELEASE",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
@@ -15,13 +15,15 @@
     "redux-logger": "^3.0.1",
     "redux-promise-middleware": "^6.1.2",
     "redux-thunk": "^2.3.0",
+    "serve": "^12.0.0",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serve": "node_modules/serve/bin/serve.js -s build"
   },
   "eslintConfig": {
     "extends": [
