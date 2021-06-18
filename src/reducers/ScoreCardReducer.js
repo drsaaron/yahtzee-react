@@ -87,7 +87,7 @@ export default function ScoreCardReducer(state = initialState, action) {
 	for (var i = 0; i < scores.length; i++) {
 	    scores[i].taken = false;
 	    scores[i].score = 0;
-	    scores[i].possibleScore = 0;
+	    scores[i].possibleScore = '';
 	}
 
 	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: total, bonusEarned: false };
