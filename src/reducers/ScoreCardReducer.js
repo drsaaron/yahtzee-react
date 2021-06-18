@@ -12,20 +12,20 @@ const initialState = {
     bonusEarned: false,
 
     scores: [
-	{ type: ScoreTypes.ACES, score: 0, taken: false, possibleScore: 0 },
-	{ type: ScoreTypes.TWOS, score: 0, taken: false, possibleScore: 0 },
-	{ type: ScoreTypes.THREES, score: 0, taken: false, possibleScore: 0 },
-	{ type: ScoreTypes.FOURS, score: 0, taken: false, possibleScore: 0 },
-	{ type: ScoreTypes.FIVES, score: 0, taken: false, possibleScore: 0 },
-	{ type: ScoreTypes.SIXES, score: 0, taken: false, possibleScore: 0 },
+	{ type: ScoreTypes.ACES, score: 0, taken: false, possibleScore: '' },
+	{ type: ScoreTypes.TWOS, score: 0, taken: false, possibleScore: '' },
+	{ type: ScoreTypes.THREES, score: 0, taken: false, possibleScore: '' },
+	{ type: ScoreTypes.FOURS, score: 0, taken: false, possibleScore: '' },
+	{ type: ScoreTypes.FIVES, score: 0, taken: false, possibleScore: '' },
+	{ type: ScoreTypes.SIXES, score: 0, taken: false, possibleScore: '' },
 
-	{ type: ScoreTypes.THREE_OF_A_KIND, score: 0, taken: false, possibleScore: 0 },
-	{ type: ScoreTypes.FOUR_OF_A_KIND, score: 0, taken: false, possibleScore: 0 },
-	{ type: ScoreTypes.FULL_HOUSE, score: 0, taken: false, possibleScore: 0 },
-	{ type: ScoreTypes.SMALL_STRAIGHT, score: 0, taken: false, possibleScore: 0 },
-	{ type: ScoreTypes.LARGE_STRAIGHT, score: 0, taken: false, possibleScore: 0 },
-	{ type: ScoreTypes.YAHTZEE, score: 0, taken: false, possibleScore: 0 },
-	{ type: ScoreTypes.CHANCE, score: 0, taken: false, possibleScore: 0 }
+	{ type: ScoreTypes.THREE_OF_A_KIND, score: 0, taken: false, possibleScore: '' },
+	{ type: ScoreTypes.FOUR_OF_A_KIND, score: 0, taken: false, possibleScore: '' },
+	{ type: ScoreTypes.FULL_HOUSE, score: 0, taken: false, possibleScore: '' },
+	{ type: ScoreTypes.SMALL_STRAIGHT, score: 0, taken: false, possibleScore: '' },
+	{ type: ScoreTypes.LARGE_STRAIGHT, score: 0, taken: false, possibleScore: '' },
+	{ type: ScoreTypes.YAHTZEE, score: 0, taken: false, possibleScore: '' },
+	{ type: ScoreTypes.CHANCE, score: 0, taken: false, possibleScore: '' }
     ]
 };
 
@@ -73,7 +73,7 @@ export default function ScoreCardReducer(state = initialState, action) {
 
 	scores = cloneArray(state.scores);
 	index = scores.findIndex(s => s.type === scoreType);
-	scores[index].possibleScore = score;
+	scores[index].possibleScore = score > 0 ? score : '';
 
 	// done
 	return { ...state, scores: scores };	
