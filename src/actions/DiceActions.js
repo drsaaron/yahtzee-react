@@ -41,8 +41,7 @@ export function toggleDieKeeper(die, newValue) {
 
 export function clearKeepers(dice) {
 
-    return (dispatch, getState) => {
-	var dice = getState().dice.dice;
+    return (dispatch) => {
 	var newDice = cloneArray(dice);
 	for (var i = 0; i < newDice.length; i++) {
 	    newDice[i].keeper = false;
@@ -53,8 +52,7 @@ export function clearKeepers(dice) {
 
 export function keepAll(dice) {
 
-    return (dispatch, getState) => {
-	var dice = getState().dice.dice;
+    return (dispatch) => {
 	var newDice = cloneArray(dice);
 	for (var i = 0; i < newDice.length; i++) {
 	    newDice[i].keeper = true;
