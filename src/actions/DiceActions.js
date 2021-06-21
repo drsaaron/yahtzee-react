@@ -9,16 +9,18 @@ function getRandomInt(max) {
 export function rollDice(dice) {
 
     return (dispatch) => {
-	dice.map(d => {
+	var newDice = cloneArray(dice);
+	newDice.map(d => {
 	    if (!d.keeper) {
 		var newValue = getRandomInt(6) + 1;
 		d.value = newValue;
 	    }
+	    return d;
 	});
 
 	dispatch({
 	    type: ActionTypes.DICE_ROLLED,
-	    dice: dice
+	    dice: newDice
 	});
     };
 }
