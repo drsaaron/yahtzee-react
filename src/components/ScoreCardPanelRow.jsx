@@ -22,7 +22,7 @@ class ScoreCardPanelRow extends Component {
     
     handleButtonClick(event) {
 	event.preventDefault();
-	this.props.takeScore(this.props.scoreType, calculateScore(this.props.dice, this.props.scoreType), this.props.dice);
+	this.props.takeScore(this.props.scoreType, calculateScore(this.props.dice, this.props.scoreType), this.props.dice, this.props.scoreCard);
     }
 
     getClassNames(scoreState) {
@@ -54,7 +54,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-	takeScore: (scoreType, score, dice) => dispatch(takeScore(scoreType, score, dice)),
+	takeScore: (scoreType, score, dice, scoreCard) => dispatch(takeScore(scoreType, score, dice, scoreCard)),
 	updatePossibleScore: (scoreType, score) => dispatch(updatePossibleScore(scoreType, score))
     };
 }

@@ -23,13 +23,9 @@ export function rollDice(dice) {
     };
 }
 
-export function toggleDieKeeper(die, newValue) {
+export function toggleDieKeeper(dice, die, newValue) {
 
-    /* I do not understand why we need to get through getState, but trying to pass dice to the
-       function just doesn't seem to work.  I don't know why it doesn't, but I haven't gotten
-       it to work yet. */
-    return (dispatch, getState) => {  
-	var dice = getState().dice.dice;
+    return (dispatch) => {  
 	var newDice = cloneArray(dice);
 	newDice.find(d => d.key === die.key).keeper = newValue;
 	

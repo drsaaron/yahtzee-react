@@ -22,7 +22,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
 	rollDice: (dice) => dispatch(rollDice(dice)),
-	toggleDieKeeper: (die, newValue) => dispatch(toggleDieKeeper(die, newValue)),
+	toggleDieKeeper: (dice, die, newValue) => dispatch(toggleDieKeeper(dice, die, newValue)),
 	clearKeepers: (dice) => dispatch(clearKeepers(dice)),
 	keepAll: (dice) => dispatch(keepAll(dice)),
 	newGame: () => dispatch(newGame())

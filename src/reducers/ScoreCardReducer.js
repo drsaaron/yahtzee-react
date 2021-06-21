@@ -3,9 +3,6 @@ import ScoreTypes from '../actions/ScoreTypes';
 import { cloneArray } from './utilityFunctions';
 import { calculateScore } from '../actions/Scorers';
 
-const UPPER_PANEL = [ ScoreTypes.ACES, ScoreTypes.TWOS, ScoreTypes.THREES, ScoreTypes.FOURS, ScoreTypes.FIVES, ScoreTypes.SIXES ];
-const LOWER_PANEL = [ ScoreTypes.THREE_OF_A_KIND, ScoreTypes.FOUR_OF_A_KIND, ScoreTypes.FULL_HOUSE, ScoreTypes.SMALL_STRAIGHT, ScoreTypes.LARGE_STRAIGHT, ScoreTypes.YAHTZEE, ScoreTypes.CHANCE ];
-
 const initialState = {
     upperPanelTotal: 0,
     lowerPanelTotal: 0,
@@ -30,18 +27,10 @@ const initialState = {
     ]
 };
 
-function accumulateScore(scores, panel) {
-    var panelScore = 0;
-    for (var i = 0; i < panel.length; i++) {
-	var scoreType = panel[i];
-	panelScore += scores.find(s => s.type === scoreType).score;
-    }
-    return panelScore;
-}
-
 export default function ScoreCardReducer(state = initialState, action) {
     switch(action.type) {
 
+	// if the dice state changed, update possible scores.
     case ActionTypes.DICE_ROLLED:
     case ActionTypes.DIE_KEEPER_CHANGE:
     case ActionTypes.CLEAR_KEEPERS:
@@ -60,35 +49,20 @@ export default function ScoreCardReducer(state = initialState, action) {
     case ActionTypes.SCORE_TAKEN:
 	var scoreType = action.scoreType;
 	var score = action.score;
+	var upperPanelScore = action.upperPanelScore;
+	var lowerPanelScore = action.lowerPanelScore;
+	var totalScore = action.totalScore;
+	var scores = action.scores;
+	var bonusEarned = action.bonusEarned
 
-	var scores = cloneArray(state.scores);
-	var index = scores.findIndex(s => s.type === scoreType);
-	scores[index].score = score;
-	scores[index].taken = true;
-	var bonusEarned = false;
-
-	// update scores.
-	var upperPanelScore = accumulateScore(scores, UPPER_PANEL);
-	var lowerPanelScore = accumulateScore(scores, LOWER_PANEL);
-
-	// check for bonus
-	if (upperPanelScore >= 63) {
-	    upperPanelScore += 35;
-	    bonusEarned = true;
-	}
-	
-	// calc the total
-	var total = upperPanelScore + lowerPanelScore;
-
-	// done
-	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: total, bonusEarned: bonusEarned };
+	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: totalScore, bonusEarned: bonusEarned };
 
     case ActionTypes.UPDATE_POSSIBLE_SCORE:
 	scoreType = action.scoreType;
 	score = action.score;
 
 	scores = cloneArray(state.scores);
-	index = scores.findIndex(s => s.type === scoreType);
+	var index = scores.findIndex(s => s.type === scoreType);
 	scores[index].possibleScore = score > 0 ? score : '';
 
 	// done
@@ -97,7 +71,7 @@ export default function ScoreCardReducer(state = initialState, action) {
     case ActionTypes.NEW_GAME:
 	upperPanelScore = 0;
 	lowerPanelScore = 0;
-	total = 0;
+	var total = 0;
 
 	scores = cloneArray(state.scores);
 	for (var i = 0; i < scores.length; i++) {

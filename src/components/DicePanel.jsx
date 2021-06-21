@@ -46,7 +46,7 @@ const DicePanel = (props) => {
 		<button onClick={(event) => handleNewGame(event, props)}>New game</button>
 	    </div>
 	    <div id="dice">
-		{dice.map(v => <Die className="die" die={v} key={v.key} toggleDieKeeper={props.toggleDieKeeper} />)}
+		{dice.map(v => <Die className="die" dice={dice} die={v} key={v.key} toggleDieKeeper={props.toggleDieKeeper} />)}
 	    </div>
 	</div>
     );

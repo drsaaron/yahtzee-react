@@ -2,12 +2,12 @@
 import './die.css';
 
 function handleKeeperChange(event, props) {
-    props.toggleDieKeeper(props.die, event.target.checked);
+    props.toggleDieKeeper(props.dice, props.die, event.target.checked);
 }
 
 function handleImageClick(props) {
     var checked = !props.die.keeper;
-    props.toggleDieKeeper(props.die, checked);
+    props.toggleDieKeeper(props.dice, props.die, checked);
 }
 
 const Die = (props) => {
