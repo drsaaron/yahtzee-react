@@ -39,7 +39,7 @@ export function takeScore(scoreType, score, dice, scoreCard) {
 	}
 
 	// bonus yahtzee
-	if (scoreType == ScoreTypes.YAHTZEE) {
+	if (scoreType == ScoreTypes.YAHTZEE && score > 0) {
 	    yahtzeeEarned = true;
 	} else {
 	    // if yahtzee was previously earned and this score is also worthy of yahztee, count
