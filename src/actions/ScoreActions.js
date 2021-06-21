@@ -3,6 +3,7 @@ import ActionTypes from './ActionTypes';
 import { rollDice, clearKeepers } from './DiceActions';
 import ScoreTypes from './ScoreTypes';
 import { cloneArray } from '../reducers/utilityFunctions';
+import { calculateScore } from './Scorers';
 
 const UPPER_PANEL = [ ScoreTypes.ACES, ScoreTypes.TWOS, ScoreTypes.THREES, ScoreTypes.FOURS, ScoreTypes.FIVES, ScoreTypes.SIXES ];
 const LOWER_PANEL = [ ScoreTypes.THREE_OF_A_KIND, ScoreTypes.FOUR_OF_A_KIND, ScoreTypes.FULL_HOUSE, ScoreTypes.SMALL_STRAIGHT, ScoreTypes.LARGE_STRAIGHT, ScoreTypes.YAHTZEE, ScoreTypes.CHANCE ];
@@ -24,6 +25,8 @@ export function takeScore(scoreType, score, dice, scoreCard) {
 	scores[index].score = score;
 	scores[index].taken = true;
 	var bonusEarned = false;
+	var yahtzeeEarned = scoreCard.yahtzeeEarned;
+	var bonusYahtzeeCount = scoreCard.bonusYahtzeeCount;
 
 	// update scores.
 	var upperPanelScore = accumulateScore(scores, UPPER_PANEL);
@@ -34,12 +37,22 @@ export function takeScore(scoreType, score, dice, scoreCard) {
 	    upperPanelScore += 35;
 	    bonusEarned = true;
 	}
+
+	// bonus yahtzee
+	if (scoreType == ScoreTypes.YAHTZEE) {
+	    yahtzeeEarned = true;
+	} else {
+	    // if yahtzee was previously earned and this score is also worthy of yahztee, count
+	    if (yahtzeeEarned && calculateScore(dice, ScoreTypes.YAHTZEE) > 0) {
+		bonusYahtzeeCount++;
+	    }
+	}
 	
 	// calc the total
-	var total = upperPanelScore + lowerPanelScore;
+	var total = upperPanelScore + lowerPanelScore + bonusYahtzeeCount * 100;
 
 	// dispatch events.  Update the scorecard state, clar the ckeepers, and roll the dice.
-	dispatch({type: ActionTypes.SCORE_TAKEN, scoreType: scoreType, score: score, scores: scores, upperPanelScore: upperPanelScore, lowerPanelScore: lowerPanelScore, totalScore: total, bonusEarned: bonusEarned});
+	dispatch({type: ActionTypes.SCORE_TAKEN, scoreType: scoreType, score: score, scores: scores, upperPanelScore: upperPanelScore, lowerPanelScore: lowerPanelScore, totalScore: total, bonusEarned: bonusEarned, yahtzeeEarned: yahtzeeEarned, bonusYahtzeeCount: bonusYahtzeeCount});
 	dispatch(clearKeepers(getState().dice.dice));
 	dispatch(rollDice(getState().dice.dice));
     }

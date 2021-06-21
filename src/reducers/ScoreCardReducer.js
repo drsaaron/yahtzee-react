@@ -9,6 +9,10 @@ const initialState = {
     total: 0,
     bonusEarned: false,
 
+    // attributes for tracking bonus yahtzee
+    yahtzeeEarned: false,
+    bonusYahtzeeCount: 0,
+
     scores: [
 	{ type: ScoreTypes.ACES, score: 0, taken: false, possibleScore: '' },
 	{ type: ScoreTypes.TWOS, score: 0, taken: false, possibleScore: '' },
@@ -54,8 +58,10 @@ export default function ScoreCardReducer(state = initialState, action) {
 	var totalScore = action.totalScore;
 	var scores = action.scores;
 	var bonusEarned = action.bonusEarned
+	var yahtzeeEarned = action.yahtzeeEarned;
+	var bonusYahtzeeCount = action.bonusYahtzeeCount;
 
-	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: totalScore, bonusEarned: bonusEarned };
+	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: totalScore, bonusEarned: bonusEarned, yahtzeeEarned: yahtzeeEarned, bonusYahtzeeCount: bonusYahtzeeCount };
 
     case ActionTypes.UPDATE_POSSIBLE_SCORE:
 	scoreType = action.scoreType;
@@ -80,7 +86,7 @@ export default function ScoreCardReducer(state = initialState, action) {
 	    scores[i].possibleScore = '';
 	}
 
-	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: total, bonusEarned: false };
+	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: total, bonusEarned: false, yahtzeeEarned: false, bonusYahtzeeCount: 0 };
 	
     default:
 	return { ...state };

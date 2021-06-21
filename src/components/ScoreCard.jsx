@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import ScoreCardPanel from './ScoreCardPanel';
 import ScoreTypes from '../actions/ScoreTypes';
+import classNames from 'classnames';
 
 import './ScoreCard.css'
 
@@ -24,11 +25,19 @@ const lowerPanelScores = [
     { key: ScoreTypes.CHANCE, label: 'Chance' }
 ];
 
+function getBonusYahtzeeClassNames(props) {
+    return classNames({
+	visible: props.scoreCard.yahtzeeEarned,
+	hidden: !props.scoreCard.yahtzeeEarned
+    });
+}
+
 const ScoreCard = (props) => {
     return (
 	<div className="scoreCard">
 	    <ScoreCardPanel id='upperScoreCard' scores={upperPanelScores} dice={props.dice} scoreCard={props.scoreCard} total={props.scoreCard.upperPanelTotal} includeBonus={true} />
 	    <ScoreCardPanel id='lowerScoreCard' scores={lowerPanelScores} dice={props.dice} scoreCard={props.scoreCard} total={props.scoreCard.lowerPanelTotal} includeBonus={false} />
+	    <div id="bonusYahtzee" className={getBonusYahtzeeClassNames(props)}>Bonus yahtzees: {props.scoreCard.bonusYahtzeeCount}</div>
 	    <div id="totalScore">Game total: {props.scoreCard.total}</div>
 	</div>
     );
