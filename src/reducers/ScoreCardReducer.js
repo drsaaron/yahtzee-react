@@ -1,6 +1,7 @@
 import ActionTypes from '../actions/ActionTypes';
 import ScoreTypes from '../actions/ScoreTypes';
 import { cloneArray } from './utilityFunctions';
+import { calculateScore } from '../actions/Scorers';
 
 const UPPER_PANEL = [ ScoreTypes.ACES, ScoreTypes.TWOS, ScoreTypes.THREES, ScoreTypes.FOURS, ScoreTypes.FIVES, ScoreTypes.SIXES ];
 const LOWER_PANEL = [ ScoreTypes.THREE_OF_A_KIND, ScoreTypes.FOUR_OF_A_KIND, ScoreTypes.FULL_HOUSE, ScoreTypes.SMALL_STRAIGHT, ScoreTypes.LARGE_STRAIGHT, ScoreTypes.YAHTZEE, ScoreTypes.CHANCE ];
@@ -41,6 +42,21 @@ function accumulateScore(scores, panel) {
 export default function ScoreCardReducer(state = initialState, action) {
     switch(action.type) {
 
+    case ActionTypes.DICE_ROLLED:
+    case ActionTypes.DIE_KEEPER_CHANGE:
+    case ActionTypes.CLEAR_KEEPERS:
+    case ActionTypes.KEEP_ALL:
+	var dice = action.dice;
+	var scores = state.scores;
+	var updatedScores = scores.map(s => {
+	    if (!s.taken) {
+		s.possibleScore = calculateScore(dice, s.type);
+	    }
+	    return s;
+	});
+	
+	return {...state, scores: updatedScores};	
+	
     case ActionTypes.SCORE_TAKEN:
 	var scoreType = action.scoreType;
 	var score = action.score;

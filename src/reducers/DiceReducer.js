@@ -35,12 +35,6 @@ const initialState = {
     rollCount: 0
 };
 
-function clearKeepers(dice) {
-    for (var i = 0; i < dice.length; i++) {
-	dice[i].keeper = false;
-    }
-}
-
 export default function DiceReducer(state = initialState, action) {
 
     switch (action.type) {
@@ -58,34 +52,25 @@ export default function DiceReducer(state = initialState, action) {
 	};
 	
     case ActionTypes.DIE_KEEPER_CHANGE:
+	var dice = action.dice;
 	var key = action.key;
 	var keeper = action.keeper;
-
-	var dice = cloneArray(state.dice);
-	dice.find(d => d.key === key).keeper = keeper;
 
 	return {...state, dice: dice };
 	
     case ActionTypes.NEW_GAME:
 	dice = cloneArray(state.dice);
-	clearKeepers(dice);
+	for (var i = 0; i < dice.length; i++) {
+	    dice[i].keeper = false;
+	}
 
 	return {...state, rollCount: 0, dice: dice};
 	
     case ActionTypes.CLEAR_KEEPERS:
-	dice = cloneArray(state.dice);
-	clearKeepers(dice);
-
+    case ActionTypes.KEEP_ALL:
+	dice = action.dice;
 	return {...state, dice: dice };
 
-    case ActionTypes.KEEP_ALL:
-	dice = cloneArray(state.dice);
-	for (var i = 0; i < dice.length; i++) {
-	    dice[i].keeper = true;
-	}
-
-	return {...state, dice: dice }
-	
     default:
 	return {
 	    ...state

@@ -12,3 +12,11 @@
     text-align: right;
     margin: 2px
 }
+
+.scoreTaken {
+    color: black
+}
+
+.scorePossible {
+    color: grey
+}

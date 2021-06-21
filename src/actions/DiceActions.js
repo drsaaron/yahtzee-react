@@ -1,5 +1,6 @@
 
 import ActionTypes from './ActionTypes';
+import { cloneArray } from '../reducers/utilityFunctions';
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -17,32 +18,47 @@ export function rollDice(dice) {
 
 	dispatch({
 	    type: ActionTypes.DICE_ROLLED,
-	    dice
+	    dice: dice
 	});
     };
 }
 
 export function toggleDieKeeper(die, newValue) {
 
-    return (dispatch) => {
+    return (dispatch, getState) => {
+	var dice = getState().dice.dice;
+	var newDice = cloneArray(dice);
+	newDice.find(d => d.key === die.key).keeper = newValue;
+	
 	dispatch({
 	    type: ActionTypes.DIE_KEEPER_CHANGE,
 	    key: die.key,
-	    keeper: newValue
+	    keeper: newValue,
+	    dice: newDice
 	});
-    }
+    };
 }
 
 export function clearKeepers(dice) {
 
-    return (dispatch) => {
-	dispatch({type: ActionTypes.CLEAR_KEEPERS, dice: dice });
+    return (dispatch, getState) => {
+	var dice = getState().dice.dice;
+	var newDice = cloneArray(dice);
+	for (var i = 0; i < newDice.length; i++) {
+	    newDice[i].keeper = false;
+	}
+	dispatch({type: ActionTypes.CLEAR_KEEPERS, dice: newDice });
     };
 }
 
 export function keepAll(dice) {
 
-    return (dispatch) => {
-	dispatch({type: ActionTypes.KEEP_ALL, dice: dice });
+    return (dispatch, getState) => {
+	var dice = getState().dice.dice;
+	var newDice = cloneArray(dice);
+	for (var i = 0; i < newDice.length; i++) {
+	    newDice[i].keeper = true;
+	}
+	dispatch({type: ActionTypes.KEEP_ALL, dice: newDice });
     };
 }

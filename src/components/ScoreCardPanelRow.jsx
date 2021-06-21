@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import { calculateScore } from '../actions/Scorers';
 import { takeScore, updatePossibleScore } from '../actions/ScoreActions';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 
 import './ScoreCardPanelRow.css';
 
@@ -11,11 +12,7 @@ class ScoreCardPanelRow extends Component {
     constructor(props) {
 	super(props);
 
-	var scoreCard = this.props.scoreCard;
-
 	this.handleButtonClick = this.handleButtonClick.bind(this);
-	this.handleMouseOver = this.handleMouseOver.bind(this);
-	this.handleMouseExit = this.handleMouseExit.bind(this);
     }
     
     getScoreState() {
@@ -28,28 +25,22 @@ class ScoreCardPanelRow extends Component {
 	this.props.takeScore(this.props.scoreType, calculateScore(this.props.dice, this.props.scoreType), this.props.dice);
     }
 
-    handleMouseOver(event) {
-	var scoreState = this.getScoreState();
-	if (!scoreState.taken) {
-	    this.props.updatePossibleScore(this.props.scoreType, calculateScore(this.props.dice, this.props.scoreType));
-	}
+    getClassNames(scoreState) {
+	return classNames({
+	    scoreScore: true,
+	    scoreTaken: scoreState.taken,
+	    scorePossible: !scoreState.taken
+	});
     }
 
-    handleMouseExit(event) {
-	var scoreState = this.getScoreState();
-	if (!scoreState.taken) {
-	    this.props.updatePossibleScore(this.props.scoreType, 0);
-	}
-    }
-    
     render() {
 	var scoreState = this.getScoreState();
 	var displayScore = scoreState.taken ? scoreState.score : scoreState.possibleScore;
 	
 	return (
 	    <article className="scoreCardPanelRow">
-		<button onClick={this.handleButtonClick} disabled={scoreState.taken} onMouseEnter={this.handleMouseOver} onMouseLeave={this.handleMouseExit}>{this.props.label}</button>
-		<div className="scoreScore">{displayScore}</div>
+		<button onClick={this.handleButtonClick} disabled={scoreState.taken}>{this.props.label}</button>
+		<div className={this.getClassNames(scoreState)}>{displayScore}</div>
 	    </article>
 	);
     }
