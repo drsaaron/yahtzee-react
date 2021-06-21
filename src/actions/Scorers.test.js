@@ -2,13 +2,13 @@ import { calculateScore } from './Scorers';
 import ScoreTypes from './ScoreTypes';
 
 test('aces scorer', () => {
-    var dice = [ { keeper: true, value: 1 }, { keeper: true, value: 1 }, { keeper: true, value: 2 } ];
+    var dice = [ { keeper: true, value: 1 }, { keeper: false, value: 1 }, { keeper: true, value: 2 } ];
     expect(calculateScore(dice, ScoreTypes.ACES)).toBe(2);
 });
 
 // yahtzee
 test('yahtzee scorer, valid', () => {
-    var dice = [ { keeper: true, value: 4 }, { keeper: true, value: 4 }, { keeper: true, value: 4 }, { keeper: true, value: 4 }, { keeper: true, value: 4 } ];
+    var dice = [ { keeper: true, value: 4 }, { keeper: true, value: 4 }, { keeper: false, value: 4 }, { keeper: true, value: 4 }, { keeper: true, value: 4 } ];
     expect(calculateScore(dice, ScoreTypes.YAHTZEE)).toBe(50);
 });
 
@@ -47,4 +47,9 @@ test('full house, valid', () => {
 test('full house, bad', () => {
     var dice = [ { keeper: true, value: 4 }, { keeper: true, value: 2 }, { keeper: true, value: 2 }, { keeper: true, value: 4 }, { keeper: true, value: 5 } ];
     expect(calculateScore(dice, ScoreTypes.FULL_HOUSE)).toBe(0);
+});
+
+test('full house, no keepers', () => {
+    var dice = [ { keeper: false, value: 4 }, { keeper: false, value: 2 }, { keeper: false, value: 2 }, { keeper: false, value: 4 }, { keeper: false, value: 4 } ];
+    expect(calculateScore(dice, ScoreTypes.FULL_HOUSE)).toBe(25);
 });

@@ -11,7 +11,7 @@ function getKeepers(dice) {
 }
 
 function upperCardScorer(dice, value) {
-    var keepers = dice.filter(d => d.keeper && d.value === value);
+    var keepers = dice.filter(d => d.value === value);
     var sum = keepers.reduce(summer, 0);
     return sum;
 }
@@ -127,8 +127,8 @@ function largeStraightScorer(dice) {
 }
 
 function fullHouseScorer(dice) {
-    // get keepers, should have 5
-    var keepers = getKeepers(dice);
+    // grab all the dice, don't check for keepers
+    var keepers = dice.slice();
     if (keepers.length < 5) {
 	return 0;
     }
