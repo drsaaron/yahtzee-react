@@ -33,7 +33,7 @@ const GameCard = (props) => {
     return (
 	<div className='gameCard'>
             Yo dude.
-	    <DicePanel dice={props.dice} rollDice={props.rollDice} toggleDieKeeper={props.toggleDieKeeper} clearKeepers={props.clearKeepers} keepAll={props.keepAll} newGame={props.newGame} />
+	    <DicePanel dice={props.dice} rollDice={props.rollDice} toggleDieKeeper={props.toggleDieKeeper} clearKeepers={props.clearKeepers} keepAll={props.keepAll} newGame={props.newGame} scoreCard={props.scoreCard} />
 	    <ScoreCard dice={props.dice.dice} scoreCard={props.scoreCard} />
 	</div>
     );

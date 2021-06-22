@@ -3,6 +3,8 @@ import ScoreTypes from '../actions/ScoreTypes';
 import { cloneArray } from './utilityFunctions';
 import { calculateScore } from '../actions/Scorers';
 
+const MAX_SCORES = 13;
+
 const initialState = {
     upperPanelTotal: 0,
     lowerPanelTotal: 0,
@@ -28,7 +30,9 @@ const initialState = {
 	{ type: ScoreTypes.LARGE_STRAIGHT, score: 0, taken: false, possibleScore: '' },
 	{ type: ScoreTypes.YAHTZEE, score: 0, taken: false, possibleScore: '' },
 	{ type: ScoreTypes.CHANCE, score: 0, taken: false, possibleScore: '' }
-    ]
+    ],
+
+    remainingScores: MAX_SCORES
 };
 
 export default function ScoreCardReducer(state = initialState, action) {
@@ -60,8 +64,9 @@ export default function ScoreCardReducer(state = initialState, action) {
 	var bonusEarned = action.bonusEarned
 	var yahtzeeEarned = action.yahtzeeEarned;
 	var bonusYahtzeeCount = action.bonusYahtzeeCount;
+	var remainingScores = state.remainingScores - 1;
 
-	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: totalScore, bonusEarned: bonusEarned, yahtzeeEarned: yahtzeeEarned, bonusYahtzeeCount: bonusYahtzeeCount };
+	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: totalScore, bonusEarned: bonusEarned, yahtzeeEarned: yahtzeeEarned, bonusYahtzeeCount: bonusYahtzeeCount, remainingScores: remainingScores };
 
     case ActionTypes.UPDATE_POSSIBLE_SCORE:
 	scoreType = action.scoreType;
@@ -86,7 +91,7 @@ export default function ScoreCardReducer(state = initialState, action) {
 	    scores[i].possibleScore = '';
 	}
 
-	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: total, bonusEarned: false, yahtzeeEarned: false, bonusYahtzeeCount: 0 };
+	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: total, bonusEarned: false, yahtzeeEarned: false, bonusYahtzeeCount: 0, remainingScores: MAX_SCORES };
 	
     default:
 	return { ...state };
