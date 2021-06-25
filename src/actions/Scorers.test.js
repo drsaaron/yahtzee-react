@@ -8,7 +8,7 @@ test('aces scorer', () => {
 
 // yahtzee
 test('yahtzee scorer, valid', () => {
-    var dice = [ { keeper: true, value: 4 }, { keeper: true, value: 4 }, { keeper: false, value: 4 }, { keeper: true, value: 4 }, { keeper: true, value: 4 } ];
+    var dice = [ { keeper: true, value: 4 }, { keeper: true, value: 4 }, { keeper: true, value: 4 }, { keeper: true, value: 4 }, { keeper: true, value: 4 } ];
     expect(calculateScore(dice, ScoreTypes.YAHTZEE)).toBe(50);
 });
 
