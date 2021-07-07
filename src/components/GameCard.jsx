@@ -12,6 +12,8 @@ import { newGame } from '../actions/GameActions';
 
 import './GameCard.css';
 
+const {version} = require("../../package.json");
+
 const mapStateToProps = (state) => {
     return {
 	dice: state.dice,
@@ -32,7 +34,7 @@ const mapDispatchToProps = (dispatch) => {
 const GameCard = (props) => {
     return (
 	<div className='gameCard'>
-            Yo dude.
+            Welcome to Yahtzee version {version}
 	    <DicePanel dice={props.dice} rollDice={props.rollDice} toggleDieKeeper={props.toggleDieKeeper} clearKeepers={props.clearKeepers} keepAll={props.keepAll} newGame={props.newGame} scoreCard={props.scoreCard} />
 	    <ScoreCard dice={props.dice.dice} scoreCard={props.scoreCard} />
 	</div>
