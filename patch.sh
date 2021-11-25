@@ -3,7 +3,7 @@
 yarn upgrade
 
 # if the lock file is updated, update the version
-if ! git diff-index --quiet HEAD yarn.lock
+if gitFileChanged.sh -f yarn.lock
 then
     echo "lock file upgraded, so update version"
     yarn version --patch
