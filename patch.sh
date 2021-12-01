@@ -6,6 +6,8 @@ yarn upgrade
 if gitFileChanged.sh -f yarn.lock
 then
     echo "lock file upgraded, so update version"
+    git add . # need to commit locally before running npm version patch
+    git commit -m 'patch'
     yarn version --patch
 else
     echo "lock file unchanged so no version update"
