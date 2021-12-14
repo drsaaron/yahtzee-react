@@ -7,20 +7,20 @@ EXPOSE $SERVER_PORT
 
 # add the source
 ADD package.json .
-ADD yarn.lock .
+ADD package-lock.json .
 ADD src ./src
 ADD public ./public
 
 # get the packages
-RUN yarn install
+RUN npm install
 
 # health checvk
 HEALTHCHECK CMD curl --fail localhost:$SERVER_PORT || exit 1
 
-# build the app.  See https://github.com/webpack/webpack/issues/14532 for the NODE_OPTIONS
+# build the app. See https://github.com/webpack/webpack/issues/14532 for the NODE_OPTIONS
 ENV NODE_OPTIONS --openssl-legacy-provider
-RUN yarn build
+RUN npm run build
 
 # start the server
-CMD [ "yarn", "serve" ]
+CMD [ "npm", "run", "serve" ]
 
