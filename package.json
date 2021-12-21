@@ -1,6 +1,6 @@
 {
   "name": "yahtzee-react",
-  "version": "1.0.27",
+  "version": "1.0.28",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
