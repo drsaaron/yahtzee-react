@@ -26,6 +26,9 @@ app.post('/api/highScore', (req, res) => {
     var newHighScore = req.body;
     updateHighScore(newHighScore)
 	.then(hs => {
+	    return getHighScore();
+	})
+	.then(hs => {
 	    return res.json(hs);
 	});
 });

@@ -37,7 +37,7 @@ async function updateHighScore_work(newHighScore) {
     try {
 	await client.connect();
 
-	const db = client.db('yahtzee');
+	const database = client.db('yahtzee');
 	const highScoresCollection = database.collection('high_scores');
 
 	// simply insert.  the get will sort and get the latest.
