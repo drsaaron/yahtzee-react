@@ -24,8 +24,10 @@ app.get('/api/highScore', (req, res) => {
 
 app.post('/api/highScore', (req, res) => {
     var newHighScore = req.body;
-    updateHighScore(newHighScore);
-    return res.json(getHighScore());
+    updateHighScore(newHighScore)
+	.then(hs => {
+	    return res.json(hs);
+	});
 });
 	
 app.get('*', (req, res) => {

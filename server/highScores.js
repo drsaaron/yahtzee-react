@@ -33,8 +33,25 @@ function getHighScore() {
     });
 };
 
+async function updateHighScore_work(newHighScore) {
+    try {
+	await client.connect();
+
+	const db = client.db('yahtzee');
+	const highScoresCollection = database.collection('high_scores');
+
+	// simply insert.  the get will sort and get the latest.
+	const result = await highScoresCollection.insertOne(newHighScore);
+	return result;
+    } finally {
+	//await client.close();
+    }
+}
+
 function updateHighScore(newHighScore) {
-    highScore = newHighScore;
+    return new Promise((resolve, reject) => {
+	resolve(updateHighScore_work(newHighScore));
+    });
 }
 
 exports.getHighScore = getHighScore;
