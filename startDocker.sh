@@ -9,5 +9,8 @@ containerName=yahtzee
 docker stop $containerName
 docker rm $containerName
 
-docker run --name $containerName -d -p 8880:$port --user $(id -u):$(id -g) $imageName:$version
+mongoUser=myUser
+mongoPass=$(pass Database/mongo/atlas/$mongoUser | head -1)
+
+docker run --name $containerName -d -p 8880:$port --user $(id -u):$(id -g) -e MONGO_DB_USER=$mongoUser -e MONGO_DB_PASS="$mongoPass" $imageName:$version
 

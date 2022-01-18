@@ -4,6 +4,7 @@ import { rollDice, clearKeepers } from './DiceActions';
 import ScoreTypes from './ScoreTypes';
 import { cloneArray } from '../reducers/utilityFunctions';
 import { calculateScore } from './Scorers';
+import { updateHighScore } from './HighScoreActions';
 
 const UPPER_PANEL = [ ScoreTypes.ACES, ScoreTypes.TWOS, ScoreTypes.THREES, ScoreTypes.FOURS, ScoreTypes.FIVES, ScoreTypes.SIXES ];
 const LOWER_PANEL = [ ScoreTypes.THREE_OF_A_KIND, ScoreTypes.FOUR_OF_A_KIND, ScoreTypes.FULL_HOUSE, ScoreTypes.SMALL_STRAIGHT, ScoreTypes.LARGE_STRAIGHT, ScoreTypes.YAHTZEE, ScoreTypes.CHANCE ];
@@ -55,6 +56,18 @@ export function takeScore(scoreType, score, dice, scoreCard) {
 	dispatch({type: ActionTypes.SCORE_TAKEN, scoreType: scoreType, score: score, scores: scores, upperPanelScore: upperPanelScore, lowerPanelScore: lowerPanelScore, totalScore: total, bonusEarned: bonusEarned, yahtzeeEarned: yahtzeeEarned, bonusYahtzeeCount: bonusYahtzeeCount});
 	dispatch(clearKeepers(getState().dice.dice));
 	dispatch(rollDice(getState().dice.dice));
+
+	// are we done with the game and have a new max score?
+	if (scoreCard.remainingScores <= 1) {
+	    var currentHighScore = getState().highScore.highScore;
+	    console.log("current high score: " + currentHighScore);
+	    if (total > currentHighScore) {
+		// new high score!
+		var highScore = getState().highScore;
+		var newHighScore = {name: highScore.name, highScore: total};
+		dispatch(updateHighScore(newHighScore));
+	    }
+	}
     }
 }
 

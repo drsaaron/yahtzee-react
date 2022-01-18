@@ -1,0 +1,3 @@
+{
+    "SCORE_DB_URL": "mongodb://localhost/yahtzee"
+}
