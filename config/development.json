@@ -1,4 +1,3 @@
 {
-    "PORT": 3000,
     "SCORE_DB_URL": "mongodb://localhost/yahtzee"
 }

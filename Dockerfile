@@ -5,6 +5,10 @@ FROM drsaaron/blazarnodebase:1.7
 ENV SERVER_PORT=3000
 EXPOSE $SERVER_PORT
 
+# mongo DB userID and password
+ENV MONGO_DB_USER
+ENV MONGO_DB_PASS
+
 # add the source
 ADD package.json .
 ADD package-lock.json .

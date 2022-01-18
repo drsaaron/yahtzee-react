@@ -1,7 +1,15 @@
 const { MongoClient } = require('mongodb');
 const config = require('config');
 
-const SCORE_DB_URL = config.get('SCORE_DB_URL');
+var SCORE_DB_URL = config.get('SCORE_DB_URL');
+
+// fix up the ID and password.  Ick.
+if (process.env.NODE_ENV == "production") {
+    var user = process.env.MONGO_DB_USER;
+    var pass = process.env.MONGO_DB_PASS;
+    SCORE_DB_URL = SCORE_DB_URL.replace("__USER__", user).replace("__PASS__", pass);
+}
+
 const client = new MongoClient(SCORE_DB_URL);
 client.connect();
 
