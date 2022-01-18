@@ -34,6 +34,9 @@ function getHighScore() {
 };
 
 async function updateHighScore_work(newHighScore) {
+    // set the date explicitly here to ensure all works as expected.
+    newHighScore.date = Date.now();
+    
     try {
 	await client.connect();
 
