@@ -16,14 +16,14 @@ app.use(bodyParser.json());
 var httpServer = http.createServer(app);
 
 app.get('/api/highScore', (req, res) => {
-    var highScore = getHighScore();
-    console.log("hgih score: " + highScore.highScore);
-    return res.json(getHighScore());
+    getHighScore()
+	.then(hs => {
+	    return res.json(hs);
+	});
 });
 
 app.post('/api/highScore', (req, res) => {
     var newHighScore = req.body;
-    console.log("new hgih score: " + newHighScore);
     updateHighScore(newHighScore);
     return res.json(getHighScore());
 });

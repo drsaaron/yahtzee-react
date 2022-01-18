@@ -1,9 +1,37 @@
+const { MongoClient } = require('mongodb');
+const config = require('config');
 
-var highScore = { name: 'Scott', highScore: 250, date: '2022-01-18' };
+const SCORE_DB_URL = config.get('SCORE_DB_URL');
+const client = new MongoClient(SCORE_DB_URL);
+
+const defaultHighScore = { name: 'Scott', highScore: 25, date: '2022-01-18' };
+
+async function getHighScore_work() {
+    try {
+	await client.connect();
+	
+	const database = client.db('yahtzee');
+	const highScoresCollection = database.collection('high_scores');
+
+	// read the list, sorting by date so the most recent can be the first in the list
+	var highScoreList = await highScoresCollection.find().sort({date: -1}).toArray();
+	if (highScoreList.length == 0) {
+	    highScoreList = [defaultHighScore];
+	    const result = await highScoresCollection.insertOne(defaultHighScore);
+	}
+	
+	highScore = highScoreList[0];
+	return highScore;
+    } finally {
+	//	await client.close();
+    }
+}
 
 function getHighScore() {
-    return highScore;
-}
+    return new Promise((resolve, reject) => {
+	resolve(getHighScore_work());
+    });
+};
 
 function updateHighScore(newHighScore) {
     highScore = newHighScore;
