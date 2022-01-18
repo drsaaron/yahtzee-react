@@ -3,15 +3,19 @@ const config = require('config');
 
 const SCORE_DB_URL = config.get('SCORE_DB_URL');
 const client = new MongoClient(SCORE_DB_URL);
+client.connect();
 
-const defaultHighScore = { name: 'Scott', highScore: 25, date: '2022-01-18' };
+const defaultHighScore = { name: 'Scott', highScore: 0, date: Date.now() };
+
+function getCollection(client) {
+    const database = client.db('yahtzee');
+    const highScoresCollection = database.collection('high_scores');
+    return highScoresCollection;
+}
 
 async function getHighScore_work() {
     try {
-	await client.connect();
-	
-	const database = client.db('yahtzee');
-	const highScoresCollection = database.collection('high_scores');
+	const highScoresCollection = getCollection(client);
 
 	// read the list, sorting by date so the most recent can be the first in the list
 	var highScoreList = await highScoresCollection.find().sort({date: -1}).toArray();
@@ -38,10 +42,7 @@ async function updateHighScore_work(newHighScore) {
     newHighScore.date = Date.now();
     
     try {
-	await client.connect();
-
-	const database = client.db('yahtzee');
-	const highScoresCollection = database.collection('high_scores');
+	const highScoresCollection = getCollection(client);
 
 	// simply insert.  the get will sort and get the latest.
 	const result = await highScoresCollection.insertOne(newHighScore);

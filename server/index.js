@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 
 var httpServer = http.createServer(app);
 
+// add get and post API for high score
 app.get('/api/highScore', (req, res) => {
     getHighScore()
 	.then(hs => {
@@ -32,7 +33,8 @@ app.post('/api/highScore', (req, res) => {
 	    return res.json(hs);
 	});
 });
-	
+
+// if all else fails, return the react app
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
 });
