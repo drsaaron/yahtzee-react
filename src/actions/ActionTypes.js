@@ -9,5 +9,7 @@ export default {
     SCORE_TAKEN: 'ScoreTaken',
     UPDATE_POSSIBLE_SCORE: 'UpdatePossibleScore',
 
-    NEW_GAME: 'NewGame'
+    NEW_GAME: 'NewGame',
+
+    HIGH_SCORE_RETRIEVED: 'HighScoreRetrieved'
 }

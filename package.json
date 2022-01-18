@@ -22,6 +22,7 @@
     "redux-promise-middleware": "^6.1.2",
     "redux-thunk": "^2.4.1",
     "serve": "^13.0.2",
+    "superagent": "^7.0.2",
     "web-vitals": "^2.1.2"
   },
   "scripts": {
