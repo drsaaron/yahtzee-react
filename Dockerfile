@@ -6,14 +6,16 @@ ENV SERVER_PORT=3000
 EXPOSE $SERVER_PORT
 
 # mongo DB userID and password
-ENV MONGO_DB_USER
-ENV MONGO_DB_PASS
+ENV MONGO_DB_USER ''
+ENV MONGO_DB_PASS ''
 
 # add the source
 ADD package.json .
 ADD package-lock.json .
 ADD src ./src
 ADD public ./public
+ADD server ./server
+ADD config ./config
 
 # get the packages
 RUN npm install
