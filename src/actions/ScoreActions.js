@@ -64,7 +64,7 @@ export function takeScore(scoreType, score, dice, scoreCard) {
 	    if (total > currentHighScore) {
 		// new high score!
 		var highScore = getState().highScore;
-		var newHighScore = {name: highScore.name, highScore: total};
+		var newHighScore = {name: highScore.name, highScore: total, date: Date.now()};
 		dispatch(updateHighScore(newHighScore));
 	    }
 	}
