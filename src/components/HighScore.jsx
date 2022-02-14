@@ -1,18 +1,14 @@
 import { useEffect } from 'react';
-import { getHighScore } from '../actions/HighScoreActions';
-import { connect } from 'react-redux';
 
-const mapStateToProps = (state) => {
-    return {
-	highScore: state.highScore
-    };
-};
+const zeroPad = (num, places) => String(num).padStart(places, '0');
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-	getHighScore: () => dispatch(getHighScore())
-    }
-};
+function formatDate(d) {
+    var date = d.getDate();
+    var month = d.getMonth() + 1;
+    var year = d.getFullYear();
+
+    return year.toString() + "-" + zeroPad(month, 2) + "-" + zeroPad(date, 2);
+}
 
 const HighScore = (props) => {
 
@@ -23,14 +19,14 @@ const HighScore = (props) => {
     var scoreDate = props.highScore.date;
     var scoreDateTxt = '';
     if (scoreDate > 0) {
-	scoreDateTxt = (new Date(scoreDate)).toISOString().split('T')[0];
+	scoreDateTxt = formatDate((new Date(scoreDate)));
     }
 
     return (
 	<div id="highScore">
-	    High Score: {props.highScore.highScore} ({props.highScore.name} on {scoreDateTxt} )
+	    High Score: {props.highScore.highScore} ({props.highScore.name} on {scoreDateTxt})
 	</div>
     );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HighScore);
+export default HighScore;

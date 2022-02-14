@@ -40,7 +40,7 @@ const ScoreCard = (props) => {
 	    <ScoreCardPanel id='lowerScoreCard' scores={lowerPanelScores} dice={props.dice} scoreCard={props.scoreCard} total={props.scoreCard.lowerPanelTotal} includeBonus={false} />
 	    <div id="bonusYahtzee" className={getBonusYahtzeeClassNames(props)}>Bonus yahtzees: {props.scoreCard.bonusYahtzeeCount}</div>
 	    <div id="totalScore">Game total: {props.scoreCard.total}</div>
-	    <HighScore />
+	    <HighScore highScore={props.highScore} getHighScore={props.getHighScore} />
 	</div>
     );
 }

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`highScore basic 1`] = `
+<div
+  id="highScore"
+>
+  High Score: 
+  250
+   (
+   on 
+  2022-02-13
+   )
+</div>
+`;
