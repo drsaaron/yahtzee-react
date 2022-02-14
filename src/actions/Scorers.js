@@ -174,6 +174,7 @@ function getScorer(type) {
     case ScoreTypes.LARGE_STRAIGHT: return largeStraightScorer;
     case ScoreTypes.YAHTZEE: return yahtzeeScorer;
     case ScoreTypes.CHANCE: return chanceScorer;
+    default: return null;
     }
 }
 	
