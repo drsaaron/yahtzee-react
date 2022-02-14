@@ -37,7 +37,7 @@ const DicePanel = (props) => {
     var anotherRollAllowed = rollCount < 3;
     var label = (anotherRollAllowed) ? "Roll " + rollCount : "Take score";
 
-    var gameOver = props.scoreCard.remainingScores == 0;
+    var gameOver = props.scoreCard.remainingScores === 0;
 
     var canRoll = !gameOver && anotherRollAllowed;
     
