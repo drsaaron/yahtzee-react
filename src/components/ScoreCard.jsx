@@ -1,5 +1,4 @@
 
-import React, {Component} from 'react';
 import ScoreCardPanel from './ScoreCardPanel';
 import ScoreTypes from '../actions/ScoreTypes';
 import classNames from 'classnames';
@@ -40,7 +39,7 @@ const ScoreCard = (props) => {
 	    <ScoreCardPanel id='lowerScoreCard' scores={lowerPanelScores} dice={props.dice} scoreCard={props.scoreCard} total={props.scoreCard.lowerPanelTotal} includeBonus={false} />
 	    <div id="bonusYahtzee" className={getBonusYahtzeeClassNames(props)}>Bonus yahtzees: {props.scoreCard.bonusYahtzeeCount}</div>
 	    <div id="totalScore">Game total: {props.scoreCard.total}</div>
-	    <HighScore highScore={props.highScore} getHighScore={props.getHighScore} />
+	    <HighScore highScore={props.highScore} />
 	</div>
     );
 }

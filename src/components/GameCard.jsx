@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import { useEffect } from 'react';
 import ScoreCard from './ScoreCard';
 import DicePanel from './DicePanel';
 import { connect } from 'react-redux';
@@ -35,11 +36,16 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const GameCard = (props) => {
+
+    useEffect(() => {
+	props.getHighScore();
+    }, []);
+    
     return (
 	<div className='gameCard'>
             Welcome to Yahtzee version {version}
 	    <DicePanel dice={props.dice} rollDice={props.rollDice} toggleDieKeeper={props.toggleDieKeeper} clearKeepers={props.clearKeepers} keepAll={props.keepAll} newGame={props.newGame} scoreCard={props.scoreCard} />
-	    <ScoreCard dice={props.dice.dice} scoreCard={props.scoreCard} highScore={props.highScore} getHighScore={props.getHighScore} />
+	    <ScoreCard dice={props.dice.dice} scoreCard={props.scoreCard} highScore={props.highScore} />
 	</div>
     );
 };

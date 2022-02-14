@@ -1,5 +1,5 @@
 
-export default {
+const ActionTypes = {
 
     DICE_ROLLED: 'DiceRolled',
     DIE_KEEPER_CHANGE: 'DieKeeperChanged',
@@ -12,4 +12,6 @@ export default {
     NEW_GAME: 'NewGame',
 
     HIGH_SCORE_RETRIEVED: 'HighScoreRetrieved'
-}
+};
+
+export default ActionTypes;

@@ -1,5 +1,4 @@
-
-export default {
+const ScoreTypes = {
     ACES: 'Aces',
     TWOS: 'Twos',
     THREES: 'Threes',
@@ -15,3 +14,5 @@ export default {
     YAHTZEE: 'Yahtzee',
     CHANCE: 'Chance'
 };
+
+export default ScoreTypes;

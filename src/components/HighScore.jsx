@@ -1,20 +1,10 @@
-import { useEffect } from 'react';
-
-const zeroPad = (num, places) => String(num).padStart(places, '0');
+import { format } from 'date-fns';
 
 function formatDate(d) {
-    var date = d.getDate();
-    var month = d.getMonth() + 1;
-    var year = d.getFullYear();
-
-    return year.toString() + "-" + zeroPad(month, 2) + "-" + zeroPad(date, 2);
+    return format(d, 'yyyy-MM-dd');
 }
 
 const HighScore = (props) => {
-
-    useEffect(() => {
-	props.getHighScore();
-    }, []);
 
     var scoreDate = props.highScore.date;
     var scoreDateTxt = '';
