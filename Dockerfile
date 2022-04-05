@@ -1,5 +1,5 @@
 # build based on node
-FROM drsaaron/blazarnodebase:1.11
+FROM drsaaron/blazarnodebase:1.12
 
 # expose port 3000
 ENV SERVER_PORT=3000
@@ -17,7 +17,7 @@ ADD server ./server
 ADD config ./config
 
 # get the packages
-RUN npm install
+RUN npm install --force
 
 # health checvk
 HEALTHCHECK CMD curl --fail localhost:$SERVER_PORT || exit 1

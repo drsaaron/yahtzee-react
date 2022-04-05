@@ -1,12 +1,13 @@
 import ActionTypes from './ActionTypes';
-import request from 'superagent';
+import axios from 'axios';
 
+const request = axios.create();
 export function getHighScore() {
     return (dispatch) => {
 	request
 	    .get("/api/highScore")
 	    .then(res => {
-		return JSON.parse(res.text);
+		return res.data;
 	    })
 	    .then(score => {
 		dispatch({
@@ -20,11 +21,9 @@ export function getHighScore() {
 export function updateHighScore(newHighScore) {
     return (dispatch) => {
 	request
-	    .post("/api/highScore")
-	    .send(newHighScore)
-	    .set('Accept', 'application/json')
+	    .post("/api/highScore", newHighScore)
 	    .then(res => {
-		return JSON.parse(res.text)
+		return res.data
 	    })
 	    .then(score => {
 		dispatch({
