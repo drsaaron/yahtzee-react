@@ -29,7 +29,8 @@ class ScoreCardPanelRow extends Component {
 	return classNames({
 	    scoreScore: true,
 	    scoreTaken: scoreState.taken,
-	    scorePossible: !scoreState.taken
+	    scorePossible: !scoreState.taken,
+	    vcentered: this.props.label.length > 12 // this class only works for multi-line labeled rows
 	});
     }
 
