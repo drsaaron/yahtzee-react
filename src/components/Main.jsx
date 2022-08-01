@@ -1,16 +1,15 @@
 
-import React, {Component} from 'react';
 import store from '../store/YahtzeeStore';
 import { Provider } from 'react-redux';
 import GameCard from './GameCard';
 
-export default class Main extends Component {
+const Main = (props) => {
 
-    render() {
-	return (
-	    <Provider store={store}>
-		<GameCard />
-	    </Provider>
-	);
-    }
+    return (
+	<Provider store={store}>
+	    <GameCard />
+	</Provider>
+    );
 }
+
+export default Main;

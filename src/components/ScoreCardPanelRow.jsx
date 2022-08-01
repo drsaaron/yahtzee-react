@@ -1,5 +1,4 @@
 
-import React, {Component} from 'react';
 import { calculateScore } from '../actions/Scorers';
 import { takeScore, updatePossibleScore } from '../actions/ScoreActions';
 import { connect } from 'react-redux';
@@ -7,44 +6,36 @@ import classNames from 'classnames';
 
 import './ScoreCardPanelRow.css';
 
-class ScoreCardPanelRow extends Component {
+const ScoreCardPanelRow = (props) => {
 
-    constructor(props) {
-	super(props);
-
-	this.handleButtonClick = this.handleButtonClick.bind(this);
+    const getScoreState = () => {
+	var index = props.scoreCard.scores.findIndex(s => s.type === props.scoreType);
+	return props.scoreCard.scores[index];
     }
     
-    getScoreState() {
-	var index = this.props.scoreCard.scores.findIndex(s => s.type === this.props.scoreType);
-	return this.props.scoreCard.scores[index];
-    }
-    
-    handleButtonClick(event) {
+    const handleButtonClick = (event) => {
 	event.preventDefault();
-	this.props.takeScore(this.props.scoreType, calculateScore(this.props.dice, this.props.scoreType), this.props.dice, this.props.scoreCard);
+	props.takeScore(props.scoreType, calculateScore(props.dice, props.scoreType), props.dice, props.scoreCard);
     }
 
-    getClassNames(scoreState) {
+    const getClassNames = (scoreState) => {
 	return classNames({
 	    scoreScore: true,
 	    scoreTaken: scoreState.taken,
 	    scorePossible: !scoreState.taken,
-	    vcentered: this.props.label.length > 12 // this class only works for multi-line labeled rows
+	    vcentered: props.label.length > 12 // this class only works for multi-line labeled rows
 	});
     }
 
-    render() {
-	var scoreState = this.getScoreState();
-	var displayScore = scoreState.taken ? scoreState.score : scoreState.possibleScore;
+    var scoreState = getScoreState();
+    var displayScore = scoreState.taken ? scoreState.score : scoreState.possibleScore;
 	
-	return (
-	    <article className="scoreCardPanelRow">
-		<button onClick={this.handleButtonClick} disabled={scoreState.taken}>{this.props.label}</button>
-		<div className={this.getClassNames(scoreState)}>{displayScore}</div>
-	    </article>
-	);
-    }
+    return (
+	<article className="scoreCardPanelRow">
+	    <button onClick={handleButtonClick} disabled={scoreState.taken}>{props.label}</button>
+	    <div className={getClassNames(scoreState)}>{displayScore}</div>
+	</article>
+    );
 }
 
 const mapStateToProps = (state) => {
