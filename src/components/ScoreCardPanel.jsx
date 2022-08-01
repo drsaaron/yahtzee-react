@@ -4,30 +4,29 @@
  * and open the template in the editor.
  */
 
-import React, {Component} from 'react';
 import ScoreCardPanelRow from './ScoreCardPanelRow';
 import classNames from 'classnames';
 
 import './ScoreCardPanel.css';
 
-export default class ScoreCardPanel extends Component {
+const ScoreCardPanel = (props) => {
 
-    getClassNames() {
+    const getClassNames = () => {
 	return classNames({
 	    panelTotal: 1,
-	    bonusEarned: this.props.includeBonus && this.props.scoreCard.bonusEarned,
-	    bonusNotEarned: this.props.includeBonus && !this.props.scoreCard.bonusEarned
+	    bonusEarned: props.includeBonus && props.scoreCard.bonusEarned,
+	    bonusNotEarned: props.includeBonus && !props.scoreCard.bonusEarned
 	});
     }
     
-    render() {
-	var rows = this.props.scores;
+    var rows = props.scores;
 	    
-        return (
-	    <div className='scoreCardPanel'>
-		{rows.map(s => <ScoreCardPanelRow key={s.key} label={s.label} scoreType={s.key} dice={this.props.dice} scoreCard={this.props.scoreCard} />)}
-		<div className={this.getClassNames()}>Total: {this.props.total}</div>
-	    </div>
-        );
-    }
+    return (
+	<div className='scoreCardPanel'>
+	    {rows.map(s => <ScoreCardPanelRow key={s.key} label={s.label} scoreType={s.key} dice={props.dice} scoreCard={props.scoreCard} />)}
+	    <div className={getClassNames()}>Total: {props.total}</div>
+	</div>
+    );
 }
+
+export default ScoreCardPanel;
