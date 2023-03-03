@@ -1,10 +1,10 @@
 {
   "name": "yahtzee-react",
-  "version": "1.1.25",
+  "version": "1.1.26",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^13.0.0",
+    "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.0.0",
     "axios": "^1.1.2",
     "body-parser": "^1.19.1",
@@ -13,7 +13,7 @@
     "date-fns": "^2.28.0",
     "express": "^4.17.2",
     "fs": "^0.0.1-security",
-    "mongodb": "^4.3.0",
+    "mongodb": "^5.1.0",
     "path": "^0.12.7",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
