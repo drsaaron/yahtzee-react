@@ -1,5 +1,5 @@
 # build based on node
-FROM drsaaron/blazarnodebase:1.31
+FROM drsaaron/blazarnodebase:1.32
 
 # expose port 3000
 ENV SERVER_PORT=3000
