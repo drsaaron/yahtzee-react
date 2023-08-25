@@ -42,56 +42,58 @@ export default function ScoreCardReducer(state = initialState, action) {
     case ActionTypes.DICE_ROLLED:
     case ActionTypes.DIE_KEEPER_CHANGE:
     case ActionTypes.CLEAR_KEEPERS:
-    case ActionTypes.KEEP_ALL:
-	var dice = action.dice;
-	var scores = state.scores;
-	var updatedScores = scores.map(s => {
+    case ActionTypes.KEEP_ALL: {
+	let dice = action.dice;
+	let scores = state.scores;
+	let updatedScores = scores.map(s => {
 	    if (!s.taken) {
 		s.possibleScore = calculateScore(dice, s.type);
 	    }
 	    return s;
 	});
 	
-	return {...state, scores: updatedScores};	
+	return {...state, scores: updatedScores};
+    }
 	
-    case ActionTypes.SCORE_TAKEN:
-	var scoreType = action.scoreType;
-	var score = action.score;
-	var upperPanelScore = action.upperPanelScore;
-	var lowerPanelScore = action.lowerPanelScore;
-	var totalScore = action.totalScore;
-	var scores = action.scores;
-	var bonusEarned = action.bonusEarned
-	var yahtzeeEarned = action.yahtzeeEarned;
-	var bonusYahtzeeCount = action.bonusYahtzeeCount;
-	var remainingScores = state.remainingScores - 1;
+    case ActionTypes.SCORE_TAKEN: {
+	let upperPanelScore = action.upperPanelScore;
+	let lowerPanelScore = action.lowerPanelScore;
+	let totalScore = action.totalScore;
+	let scores = action.scores;
+	let bonusEarned = action.bonusEarned
+	let yahtzeeEarned = action.yahtzeeEarned;
+	let bonusYahtzeeCount = action.bonusYahtzeeCount;
+	let remainingScores = state.remainingScores - 1;
 
 	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: totalScore, bonusEarned: bonusEarned, yahtzeeEarned: yahtzeeEarned, bonusYahtzeeCount: bonusYahtzeeCount, remainingScores: remainingScores };
+    }
 
-    case ActionTypes.UPDATE_POSSIBLE_SCORE:
-	scoreType = action.scoreType;
-	score = action.score;
+    case ActionTypes.UPDATE_POSSIBLE_SCORE: {
+	let scoreType = action.scoreType;
+	let score = action.score;
 
-	scores = cloneArray(state.scores);
-	var index = scores.findIndex(s => s.type === scoreType);
+	let scores = cloneArray(state.scores);
+	let index = scores.findIndex(s => s.type === scoreType);
 	scores[index].possibleScore = score > 0 ? score : '';
 
 	// done
-	return { ...state, scores: scores };	
+	return { ...state, scores: scores };
+    }
 	
-    case ActionTypes.NEW_GAME:
-	upperPanelScore = 0;
-	lowerPanelScore = 0;
-	var total = 0;
+    case ActionTypes.NEW_GAME: {
+	let upperPanelScore = 0;
+	let lowerPanelScore = 0;
+	let total = 0;
 
-	scores = cloneArray(state.scores);
-	for (var i = 0; i < scores.length; i++) {
+	let scores = cloneArray(state.scores);
+	for (let i = 0; i < scores.length; i++) {
 	    scores[i].taken = false;
 	    scores[i].score = 0;
 	    scores[i].possibleScore = '';
 	}
 
 	return { ...state, scores: scores, upperPanelTotal: upperPanelScore, lowerPanelTotal: lowerPanelScore, total: total, bonusEarned: false, yahtzeeEarned: false, bonusYahtzeeCount: 0, remainingScores: MAX_SCORES };
+    }
 	
     default:
 	return { ...state };

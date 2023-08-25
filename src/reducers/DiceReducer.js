@@ -52,24 +52,22 @@ export default function DiceReducer(state = initialState, action) {
 	};
 	
     case ActionTypes.DIE_KEEPER_CHANGE:
-	var dice = action.dice;
-	var key = action.key;
-	var keeper = action.keeper;
-
-	return {...state, dice: dice };
+	return {...state, dice: action.dice };
 	
-    case ActionTypes.NEW_GAME:
-	dice = cloneArray(state.dice);
-	for (var i = 0; i < dice.length; i++) {
+    case ActionTypes.NEW_GAME: {
+	let dice = cloneArray(state.dice);
+	for (let i = 0; i < dice.length; i++) {
 	    dice[i].keeper = false;
 	}
 
 	return {...state, rollCount: 0, dice: dice};
+    }
 	
     case ActionTypes.CLEAR_KEEPERS:
-    case ActionTypes.KEEP_ALL:
-	dice = action.dice;
+    case ActionTypes.KEEP_ALL: {
+	let dice = action.dice;
 	return {...state, dice: dice };
+    }
 
     default:
 	return {

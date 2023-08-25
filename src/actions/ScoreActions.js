@@ -12,7 +12,7 @@ const LOWER_PANEL = [ ScoreTypes.THREE_OF_A_KIND, ScoreTypes.FOUR_OF_A_KIND, Sco
 function accumulateScore(scores, panel) {
     var panelScore = 0;
     for (var i = 0; i < panel.length; i++) {
-	var scoreType = panel[i];
+	let scoreType = panel[i];
 	panelScore += scores.find(s => s.type === scoreType).score;
     }
     return panelScore;

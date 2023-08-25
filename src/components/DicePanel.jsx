@@ -1,5 +1,5 @@
 
-import React from 'react';
+import {useEffect} from 'react';
 import Die from './Die';
 
 import './DicePanel.css';
@@ -27,7 +27,7 @@ function keepAll(event, props) {
 const DicePanel = (props) => {
 
     // on mount, roll the dice.
-    React.useEffect(() => {
+    useEffect(() => {
 	props.rollDice(props.dice.dice);
     }, []);
     
