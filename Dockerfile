@@ -17,7 +17,7 @@ ADD server ./server
 ADD config ./config
 
 # get the packages
-RUN npm install 
+RUN npm install --force
 
 # health checvk
 HEALTHCHECK CMD curl --fail localhost:$SERVER_PORT || exit 1
