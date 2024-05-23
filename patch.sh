@@ -1,6 +1,6 @@
 #! /bin/sh
 
-npm update --force
+npm update #--force
 
 # if the lock file is updated, update the version
 if gitFileChanged.sh -f package-lock.json
