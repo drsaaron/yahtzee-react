@@ -2,6 +2,8 @@ const { MongoClient } = require('mongodb');
 const config = require('config');
 
 const SCORE_DB_URL = process.env.SCORE_DB_URL || config.get('SCORE_DB_URL');
+const SCORE_DB_NAME = config.get('SCORE_DB_NAME');
+console.log("got db name " + SCORE_DB_NAME);
 
 const client = new MongoClient(SCORE_DB_URL);
 client.connect();
@@ -9,7 +11,7 @@ client.connect();
 const defaultHighScore = { name: 'Scott', highScore: 0, date: Date.now() };
 
 function getCollection(client) {
-    const database = client.db('yahtzee');
+    const database = client.db(SCORE_DB_NAME);
     const highScoresCollection = database.collection('high_scores');
     return highScoresCollection;
 }

@@ -1,3 +1,4 @@
 {
-    "SCORE_DB_URL": "mongodb://localhost/yahtzee"
+    "SCORE_DB_URL": "mongodb://localhost/yahtzee",
+    "SCORE_DB_NAME": "yahtzee_test"
 }

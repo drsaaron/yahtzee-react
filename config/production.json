@@ -1,2 +1,4 @@
 {
+    "SCORE_DB_NAME": "yahtzee_prod",
+    "SCORE_DB_URL": "mongodb://mongodb/yahtzee_prod"
 }
