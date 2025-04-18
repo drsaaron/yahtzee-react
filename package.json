@@ -1,6 +1,6 @@
 {
   "name": "yahtzee-react",
-  "version": "1.1.53",
+  "version": "1.1.54",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^6.0.1",
@@ -10,7 +10,7 @@
     "classnames": "^2.3.1",
     "config": "^3.3.7",
     "date-fns": "^4.1.0",
-    "express": "^4.17.2",
+    "express": "^5.1.0",
     "fs": "^0.0.1-security",
     "mongodb": "^6.0.0",
     "path": "^0.12.7",
