@@ -19,9 +19,6 @@ ADD config ./config
 # get the packages
 RUN npm install 
 
-# health checvk
-HEALTHCHECK CMD curl --fail localhost:$SERVER_PORT || exit 1
-
 # build the app. See https://github.com/webpack/webpack/issues/14532 for the NODE_OPTIONS
 ENV NODE_OPTIONS=--openssl-legacy-provider
 RUN npm run build
